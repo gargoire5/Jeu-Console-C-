@@ -6,6 +6,6 @@ class Program
     static void Main()
     {
         var Model = new Model();
-        Console.WriteLine(Model.dingus);
+        Console.WriteLine(Model.map);
     }
 }

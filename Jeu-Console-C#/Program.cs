@@ -5,7 +5,7 @@ class Program
 {
     static void Main()
     {
-        var Model = new Model();
-        Console.WriteLine(Model.map);
+        var sceneManager = new SceneManager();
+        sceneManager.Update();
     }
 }

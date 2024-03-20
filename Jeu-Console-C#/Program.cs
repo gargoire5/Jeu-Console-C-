@@ -1,11 +1,53 @@
-﻿using Jeu_Console_C_;
+using Jeu_Console_C_;
 using System;
+using System.Collections.Generic;
 
 class Program
 {
-    static void Main()
+    /*static void Main()
     {
         var Model = new Model();
         Console.WriteLine(Model.dingus);
+    }*/
+    
+    static void Main(string[] args)
+    {
+        // Création des Pokémon
+        Techmon Gianni = new Techmon("Gianni", TypeElement.Css);
+        Techmon Ewen = new Techmon("Ewen", TypeElement.Python);
+        Techmon Enzo = new Techmon("Enzo", TypeElement.C);
+        Techmon Kyllian = new Techmon("Kyllian", TypeElement.Python);
+
+        // Ajout d'attaques pour chaque Pokémon
+        Gianni.AjouterAttaque("Le poulet est délicieux");//Boost attaque
+        Gianni.AjouterAttaque("Purple");//Attaque
+        Gianni.AjouterAttaque("Domain Expansion");//Boost hp
+        Gianni.AjouterAttaque("I am Atomic");//Attaque
+
+        Ewen.AjouterAttaque("Dictature du délégué");//Debuff ou buff
+        Ewen.AjouterAttaque("Perdu batard");//Attaque
+
+        Enzo.AjouterAttaque("Mais elle a 12ans");// Attaque
+        Enzo.AjouterAttaque("Je suis un faux cul");// Buff
+
+        Kyllian.AjouterAttaque("Je suis coach");
+        Kyllian.AjouterAttaque("Dans ton crane");
+
+        // Simule l'ajout d'expérience
+
+        //Gianni.GagnerExperience(50);
+        //Ewen.GagnerExperience(120); // ça devrait suffire pour augmenter de niveau
+        //Enzo.GagnerExperience(30);
+
+        // Pour démonstration : Affiche les informations de chaque Pokémon
+        List<Techmon> pokemons = new List<Techmon> { Gianni, Ewen, Enzo, Kyllian };
+        foreach (var pokemon in pokemons)
+        {
+            Console.WriteLine($"{pokemon.Nom} - Niveau: {pokemon.Niveau}, Exp: {pokemon.Experience}/{pokemon.ExpPourNiveauSuivant}, PV: {pokemon.PointsDeVie}");
+            Console.WriteLine($"Attaques: {string.Join(", ", pokemon.Attaques)}");
+            Console.WriteLine(); // Ajoute une ligne vide pour la lisibilité
+        }
     }
+
+
 }

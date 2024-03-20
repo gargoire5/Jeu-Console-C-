@@ -8,23 +8,15 @@ class Program
         var Model = new Model();
         Console.WriteLine(Model.dingus);
 
-        var inputManager = new InputManager();
+        EventManager eventManager = new EventManager();
 
-        Console.WriteLine("Appuyer sur Echapp pour quitter");
+        bool running = true;
 
-        bool running = false;
-        while(!running)
+        while (running)
         {
-            if (inputManager.IsKeyPressed(ConsoleKey.Q))
-            {
-                running = true;
-            }
-            else
-            {
-                Console.WriteLine("Touche appuyée : ");
-            }
+            running = eventManager.UpdateMenu();
         }
 
-        Console.WriteLine("Fin du programme.");
+        Environment.Exit(0);
     }
 }

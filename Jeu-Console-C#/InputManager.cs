@@ -7,15 +7,29 @@ namespace Jeu_Console_C_
 {
     public class InputManager 
     {
-        public bool IsKeyPressed(ConsoleKey key)
+
+        private static bool keyPressed = false;
+        private static ConsoleKeyInfo lastKeyPress;
+        
+        public static void ReadKey()
         {
-            if(Console.KeyAvailable)
+            if (Console.KeyAvailable)
             {
-                ConsoleKeyInfo keyPressed = Console.ReadKey(true);
-                if(keyPressed.Key == key)
-                {
-                    return true;
-                }
+                lastKeyPress = Console.ReadKey(intercept : true);
+                keyPressed = true;
+            }
+            else
+            {
+                keyPressed = false;
+            }
+        }
+
+        public static bool IsKeyPressed(ConsoleKey key)
+        {
+            if (keyPressed && lastKeyPress.Key == key)
+            {
+                keyPressed = false;
+                return true;
             }
             return false;
         }

@@ -1,62 +1,67 @@
+using Jeu_Console_C_;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Jeu_Console_C_
+class Program
 {
-    public enum TypeElement
+    /*static void Main()
     {
-        Css,
-        Python,
-        C
+        var Model = new Model();
+        Console.WriteLine(Model.dingus);
+    }*/
+    
+    static void Main(string[] args)
+    {
+        // Création des Pokémon
+        Techmon Gianni = new Techmon("Gianni", TypeElement.Css);
+        Techmon Ewen = new Techmon("Ewen", TypeElement.Python);
+        Techmon Enzo = new Techmon("Enzo", TypeElement.C);
+        Techmon Kyllian = new Techmon("Kyllian", TypeElement.Python);
+        Techmon Benjamin = new Techmon("Benjamin", TypeElement.C);
+        Techmon Grégoire = new Techmon("Grégoire", TypeElement.Css);
+
+        // Ajout d'attaques pour chaque Pokémon
+        Gianni.AjouterAttaque("Le poulet est délicieux");//Boost attaque
+        Gianni.AjouterAttaque("Purple");//Attaque
+        Gianni.AjouterAttaque("Domain Expansion");//Boost hp
+        Gianni.AjouterAttaque("I am Atomic");//Attaque
+
+        Ewen.AjouterAttaque("Dictature du délégué");//Debuff ou buff
+        Ewen.AjouterAttaque("Perdu batard");//Attaque
+
+        Enzo.AjouterAttaque("Mais elle a 12ans");// Attaque
+        Enzo.AjouterAttaque("Je suis un faux cul");// Buff
+
+        Kyllian.AjouterAttaque("Je suis coach");
+        Kyllian.AjouterAttaque("Dans ton crane");
+
+        Benjamin.AjouterAttaque("Been Shilling");
+        Benjamin.AjouterAttaque("Gojo Satoru");
+        Benjamin.AjouterAttaque("Fatal Tacle");
+
+        Grégoire.AjouterAttaque("Rentre Dans Ton Pays");
+        Grégoire.AjouterAttaque("Je construirai un mur");
+
+
+
+        // Simule l'ajout d'expérience
+
+        Gianni.GagnerExperience(50);
+        Ewen.GagnerExperience(200); // ça devrait suffire pour augmenter de niveau
+        Enzo.GagnerExperience(30);
+        Kyllian.GagnerExperience(70);
+        Benjamin.GagnerExperience(20);
+        Grégoire.GagnerExperience(40);
+
+        // Pour démonstration : Affiche les informations de chaque Pokémon
+        List<Techmon> pokemons = new List<Techmon> { Gianni, Ewen, Enzo, Kyllian, Benjamin, Grégoire };
+        foreach (var pokemon in pokemons)
+        {
+            Console.WriteLine($"{pokemon.Nom} - Niveau: {pokemon.Niveau}, Exp: {pokemon.Experience}/{pokemon.ExpPourNiveauSuivant}, PV: {pokemon.PointsDeVie}");
+            Console.WriteLine($"Attaques: {string.Join(", ", pokemon.Attaques)}");
+            Console.WriteLine(); // Ajoute une ligne vide pour la lisibilité
+        }
     }
 
-    // Classe de base pour les Pokémon
-    public class Techmon
-    {
-        public string Nom { get; set; }
-        public int PointsDeVie { get; set; }
-        public int Niveau { get; set; }
-        public int Experience { get; set; }
-        public int ExpPourNiveauSuivant { get; set; }
-        public TypeElement Type { get; set; }
-        public List<string> Attaques { get; set; }
 
-        public Techmon(string nom, TypeElement type)
-        {
-            Nom = nom;
-            Type = type;
-            PointsDeVie = 100; // Valeur de départ, peut varier
-            Niveau = 1;
-            Experience = 0;
-            ExpPourNiveauSuivant = 50; // Exemple de valeur, à ajuster selon le système d'expérience
-            Attaques = new List<string>(); // Initialisation de la liste d'attaques
-        }
-
-        // Méthode pour ajouter une attaque
-        public void AjouterAttaque(string attaque)
-        {
-            Attaques.Add(attaque);
-        }
-
-        // Méthode pour gagner de l'expérience et potentiellement augmenter de niveau
-        public void GagnerExperience(int exp)
-        {
-            Experience += exp;
-            if (Experience >= ExpPourNiveauSuivant)
-            {
-                Niveau++;
-                Experience -= ExpPourNiveauSuivant;
-                // Augmenter ExpPourNiveauSuivant
-                ExpPourNiveauSuivant *= 2; // Exemple simple
-                Console.WriteLine($"{Nom} a atteint le niveau {Niveau} !");
-            }
-        }
-
-    }
 }
-
-
-

@@ -17,6 +17,8 @@ class Program
         Techmon Ewen = new Techmon("Ewen", TypeElement.Python);
         Techmon Enzo = new Techmon("Enzo", TypeElement.C);
         Techmon Kyllian = new Techmon("Kyllian", TypeElement.Python);
+        Techmon Benjamin = new Techmon("Benjamin", TypeElement.C);
+        Techmon Grégoire = new Techmon("Grégoire", TypeElement.Css);
 
         // Ajout d'attaques pour chaque Pokémon
         Gianni.AjouterAttaque("Le poulet est délicieux");//Boost attaque
@@ -32,6 +34,15 @@ class Program
 
         Kyllian.AjouterAttaque("Je suis coach");
         Kyllian.AjouterAttaque("Dans ton crane");
+
+        Benjamin.AjouterAttaque("Been Shilling");
+        Benjamin.AjouterAttaque("Gojo Satoru");
+        Benjamin.AjouterAttaque("Fatal Tacle");
+
+        Grégoire.AjouterAttaque("Rentre Dans Ton Pays");
+        Grégoire.AjouterAttaque("Je construirai un mur");
+
+
 
         // Simule l'ajout d'expérience
 

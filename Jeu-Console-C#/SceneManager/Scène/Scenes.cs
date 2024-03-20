@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,34 +18,76 @@ namespace Scenes
         }
         public void Update()
         {
-            while (true)
+            int bruh = 0;
+            while (bruh == 0)
             {
                 Console.SetCursorPosition(0,0);
+                InputManager.ReadKey();
+                if (InputManager.IsKeyPressed(ConsoleKey.P))
+                {
+                    new SceneGame();
+                }
+                if (InputManager.IsKeyPressed(ConsoleKey.Q))
+                {
+                    bruh = 1;
+                }
             }
             
         }
     }
     public class SceneGame
     {
+        Model model = new Model();
+        public SceneGame()
+        {
+            Console.Clear();
+            Console.WriteLine(model.dingus);
+            Update();
+        }
         public void Update()
         {
-
+            while (true)
+            {
+                InputManager.ReadKey();
+                if (InputManager.IsKeyPressed(ConsoleKey.M))
+                {
+                    new SceneMap();
+                }
+            }
         }
 
     }
     public class SceneFight
     {
+        Model model = new Model();
         public void Update()
         {
 
         }
 
     }
-    public class SceneMap : SceneManager
+    public class SceneMap
     {
-        override public void Update()
+        Model model = new Model();
+        public SceneMap()
         {
-
+            Console.Clear();
+            Console.WriteLine(model.map);
+            Update();
+        }
+        public void Update()
+        {
+            int bruh = 0;
+            while (bruh == 0)
+            {
+                InputManager.ReadKey();
+                if (InputManager.IsKeyPressed(ConsoleKey.M))
+                {
+                    Console.Clear();
+                    Console.WriteLine(model.dingus);
+                    bruh = 1;
+                }
+            }
         }
 
     }

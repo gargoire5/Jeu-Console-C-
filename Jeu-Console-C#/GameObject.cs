@@ -6,32 +6,50 @@ using System.Threading.Tasks;
 
 namespace Jeu_Console_C_
 {
+
+    public enum TypeElement
+    {
+        Css,
+        Python,
+        C
+    }
+
     internal class GameObject
     {
-        public string Name { get; set; }
-        public int Health { get; set; }
-        public int AttackDamage { get; set; }
+        public string Name { get; protected set; }
+        public int Health { get; protected set; }
+        public int Niveau { get; protected set; }
+        public int Experience { get; protected set; }
+        public int ExpPourNiveauSuivant { get; protected set; }
+        public TypeElement Type { get; protected set; }
+        public List<Attaque> Attaques { get; protected set; }
+        public int ModificateurDegatsSuivant { get; protected set; }
+        public float ReductionDegatsRecus { get; protected set; }
+        public string Effect { get; protected set; }
 
-        public GameObject (string name, int health, int attackDamage)
+        public GameObject(string name, int health, TypeElement type, int niveau)
         {
             Name = name;
+            Type = type;
             Health = health;
-            AttackDamage = attackDamage;
+            Niveau = niveau;
+            Experience = 0;
+            ExpPourNiveauSuivant = 100;
+            Attaques = new List<Attaque>();
+            ModificateurDegatsSuivant = 0;
+            ReductionDegatsRecus = 0;
         }
 
-        public void TakeDamage(int damage)
+        public GameObject(string name)
         {
-            Health -= damage;
-            if (Health < 0)
-            {
-                Health = 0;
-            }
+            Name = name;
         }
 
-        public void Attack(GameObject target) 
+        public GameObject(string name, string effect)
         {
-            target.TakeDamage(AttackDamage);
-            Console.WriteLine($"{Name} attaque {target.Name} et inflige {AttackDamage} dégât");
+            Name = name;
+            Effect = effect;
         }
+
     }
 }

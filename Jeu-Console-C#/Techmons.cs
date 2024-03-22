@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 namespace Jeu_Console_C_
 {
     internal class Techmons : GameObject
-    {
-        public Techmons(string name, int health, TypeElement type, int niveau) : base(name, health, type, niveau)
-        {
+    { 
 
+        public Techmons(string name, int health, TypeElement type, int niveau) : base(name, type, niveau)
+        {
+            Health = health;
         }
 
         // Méthode pour ajouter une attaque à ce Pokémon

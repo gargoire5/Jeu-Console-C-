@@ -29,7 +29,7 @@ namespace Jeu_Console_C_
             Ewen.AjouterAttaque(new Attaque("Dictature du délégué", 0, 10, 0.35f));//Debuff ou buff
             Ewen.AjouterAttaque(new Attaque("Perdu batard", 50, 0, 0));//Attaque
 
-            Enzo.AjouterAttaque(new Attaque("Mais elle a 12ans", 60, 0, 0));// Attaque
+            Enzo.AjouterAttaque(new Attaque("10-0", 60, 0, 0));// Attaque
             Enzo.AjouterAttaque(new Attaque("Je suis un faux cul", 0, 10, 0.5f));// Buff
 
             Kyllian.AjouterAttaque(new Attaque("Je suis coach", 0, 10, 0.35f));
@@ -59,8 +59,16 @@ namespace Jeu_Console_C_
         }
         public void Items()
         {
-            Items Potions = new Items("Potion", "Rend 20 PV à un Pokemon");
-            Items TechBalls = new Items("Techball", "Permet de capturer un pokemon");
+            Inventory inventory = new Inventory();
+
+            Items Potions = new Items("Potion", "Rend 20 PV à un Pokemon", 0);
+            Items TechBalls = new Items("Techball", "Permet de capturer un pokemon", 0);
+
+
+            inventory.AddItems(Potions, 5);
+            inventory.AddItems(TechBalls, 10);
+
+            inventory.DisplayInventorry();
         }
     }
 }

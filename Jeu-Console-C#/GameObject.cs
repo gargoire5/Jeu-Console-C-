@@ -17,7 +17,8 @@ namespace Jeu_Console_C_
     internal class GameObject
     {
         public string Name { get; protected set; }
-        public int Health { get; protected set; }
+        public int Health { get; set; }
+        public int Quantity { get; set; } = 0;
         public int Niveau { get; protected set; }
         public int Experience { get; protected set; }
         public int ExpPourNiveauSuivant { get; protected set; }
@@ -45,11 +46,15 @@ namespace Jeu_Console_C_
             Name = name;
         }
 
-        public GameObject(string name, string effect)
+        public GameObject(string name, string effect, int quantity)
         {
             Name = name;
             Effect = effect;
+            Quantity = quantity;
         }
 
+        public GameObject(string name, TypeElement type, int niveau) : this(name)
+        {
+        }
     }
 }

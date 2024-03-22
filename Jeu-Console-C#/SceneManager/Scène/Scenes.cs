@@ -14,6 +14,7 @@ namespace Scenes
         public SceneMenu()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(model.menu);
             Update();
         }
@@ -62,6 +63,10 @@ namespace Scenes
                 {
                     new SceneMenu();
                 }
+                if (InputManager.IsKeyPressed(ConsoleKey.I))
+                {
+                    new SceneInventory();
+                }
             }
         }
 
@@ -93,6 +98,33 @@ namespace Scenes
             {
                 InputManager.ReadKey();
                 if (InputManager.IsKeyPressed(ConsoleKey.T))
+                {
+                    Console.Clear();
+                    Console.WriteLine(model.dingus);
+                    bruh = 1;
+                }
+            }
+        }
+
+    }
+
+    public class SceneInventory
+    {
+        Game game = new Game();
+        Model model = new Model();
+        public SceneInventory()
+        {
+            Console.Clear();
+            game.Items();
+            Update();
+        }
+        public void Update()
+        {
+            int bruh = 0;
+            while (bruh == 0)
+            {
+                InputManager.ReadKey();
+                if (InputManager.IsKeyPressed(ConsoleKey.I))
                 {
                     Console.Clear();
                     Console.WriteLine(model.dingus);

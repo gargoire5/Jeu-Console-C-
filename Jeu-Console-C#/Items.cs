@@ -7,17 +7,27 @@ namespace Jeu_Console_C_
 {
     internal class Items : GameObject
     {
-        public Items(string name, string effect) : base(name, effect)
+        public Items(string name, string effect, int quantity) : base(name, effect, quantity)
         {
-
+    
         }
 
-        public virtual void PotionUse()
+        public virtual void UseItem(Techmons techmons)
         {
-            
-            Health += 20;
+            Console.WriteLine($"Vous utilisé {Name} et {Effect} sur {techmons.Name}");
+        }
 
-            //Console.WriteLine($"Health Upgraded by {Health});
+        public virtual void UsePotion(Techmons techmons)
+        {
+            techmons.Health += 20;
+            Console.WriteLine($"Vous utilisé {Name} et restaure 20 PV à {techmons.Name}. Sa maintenant de {techmons.Health} PV");
+        }
+
+        public void InfoItem()
+        {
+            Console.WriteLine($"Nom: {Name}");
+            Console.WriteLine($"Description: {Effect}");
+            Console.WriteLine();
         }
     }
 }

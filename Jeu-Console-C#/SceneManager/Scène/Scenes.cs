@@ -1,4 +1,4 @@
-﻿using Jeu_Console_C_;
+using Jeu_Console_C_;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,7 +83,7 @@ namespace Scenes
         public SceneTeam()
         {
             Console.Clear();
-            game.Team();
+            //game.Team();
             Update();
         }
         public void Update()

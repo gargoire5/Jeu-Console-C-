@@ -149,10 +149,18 @@ namespace Jeu_Console_C_
         public void AfficherAttaques()
         {
             Console.WriteLine($"{Name} peut utiliser les attaques suivantes :");
-            for (int i = 0; i < Attaques.Count; i++)
+            /*for (int i = 0; i < Attaques.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {Attaques[i].Nom} (Dégâts: {Attaques[i].Degats})");
-            }
+                //Console.WriteLine($"{i + 1}. {Attaques[i].Nom} (Dégâts: {Attaques[i].Degats})");
+                //Console.WriteLine($"- {Attaque[i].Nom}: Dégâts: {Attaques[i].Degats}, Augmente Dégâts: {Attaques.AugmentationDegatsPourcentage}%, Réduit Dégâts Reçus: {Attaques.ReductionDegatsRecus * 100}%");
+            }*/
+            Console.WriteLine("Attaques disponibles:");
+                       
+             for (int i = 0; i < Attaques.Count; i++)
+             {
+                    Console.WriteLine($"{i + 1}.{Attaques[i].Nom}: Dégâts: {Attaques[i].Degats}, Augmente Dégâts: {Attaques[i].AugmentationDegatsPourcentage}%, Réduit Dégâts Reçus: {Attaques[i].ReductionDegatsRecus * 100}%");
+             }
+            
         }
 
         private int CalculerExpPourNiveauSuivant(int niveau)

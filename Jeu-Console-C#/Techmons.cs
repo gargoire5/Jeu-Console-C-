@@ -173,7 +173,7 @@ namespace Jeu_Console_C_
             int degatsEffectifs = attaque.Degats;
             // Ajoute ici la logique pour calculer les effets de type, les buffs, etc.
             adversaire.Health -= degatsEffectifs;
-            Console.WriteLine($"{Name} utilise {attaque.Nom} et inflige {degatsEffectifs} points de dégâts à {adversaire.Name}.");
+            Console.WriteLine($"{Name} utilise {attaque.Nom} et inflige {degatsEffectifs} points de dégâts à {adversaire.Name},augmente les Dégâts de {attaque.AugmentationDegatsPourcentage}% et réduit les dégâts reçus de {attaque.ReductionDegatsRecus * 100}%");
         }
 
         // Extension: Affichage des informations du Techmon, incluant les attaques et leurs effets

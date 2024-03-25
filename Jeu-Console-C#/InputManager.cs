@@ -15,7 +15,7 @@ namespace Jeu_Console_C_
         {
             if (Console.KeyAvailable)
             {
-                lastKeyPress = Console.ReadKey(intercept : true);
+                lastKeyPress = Console.ReadKey(intercept: true);
                 keyPressed = true;
             }
             else
@@ -32,6 +32,11 @@ namespace Jeu_Console_C_
                 return true;
             }
             return false;
+        }
+
+        public static ConsoleKeyInfo GetKeyPressed()
+        {
+            return lastKeyPress;
         }
     }
 }

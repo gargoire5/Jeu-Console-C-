@@ -40,6 +40,7 @@ namespace Scenes
     public class SceneGame
     {
         Model model = new Model();
+        SceneTeam sceneTeam;
         public SceneGame()
         {
             Console.Clear();
@@ -57,7 +58,7 @@ namespace Scenes
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.T))
                 {
-                    new SceneTeam();
+                    sceneTeam = new SceneTeam();
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.Escape))
                 {
@@ -65,7 +66,9 @@ namespace Scenes
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.I))
                 {
-                    new SceneInventory();
+                   
+                    new SceneInventory(sceneTeam);
+                    
                 }
             }
         }
@@ -112,25 +115,52 @@ namespace Scenes
     {
         Game game = new Game();
         Model model = new Model();
-        public SceneInventory()
+        Inventory inventory = new Inventory();
+        private SceneTeam sceneTeam;
+        public SceneInventory(SceneTeam sceneTeam)
         {
             Console.Clear();
-            game.Items();
+            this.sceneTeam = sceneTeam;
             Update();
         }
         public void Update()
         {
-            int bruh = 0;
-            while (bruh == 0)
+            Items Potions = new Items("Potion", "Rend 20 PV à un Pokemon", 0);
+            Items TechBalls = new Items("Techball", "Permet de capturer un pokemon", 0);
+
+            inventory.AddItems(Potions, 5);
+            inventory.AddItems(TechBalls, 10);
+
+            inventory.DisplayInventorry();
+
+            bool inventoryActive = true;
+
+            while (inventoryActive)
             {
-                InputManager.ReadKey();
-                if (InputManager.IsKeyPressed(ConsoleKey.I))
+                Console.Clear();
+
+                inventory.DisplayInventorry();
+
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+                switch (keyInfo.Key)
                 {
-                    Console.Clear();
-                    Console.WriteLine(model.dingus);
-                    bruh = 1;
+                    case ConsoleKey.I:
+                        Console.Clear();
+                        Console.WriteLine(model.dingus);
+                        break;
+                    case ConsoleKey.UpArrow:
+                        inventory.MoveSelectionUp();
+                        break;
+                    case ConsoleKey.DownArrow:
+                        inventory.MoveSelectionDown();
+                        break;
+                    case ConsoleKey.Enter:
+                        inventory.UseSelectedItem();
+                        break;
                 }
             }
+
         }
 
     }

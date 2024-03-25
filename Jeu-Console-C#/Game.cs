@@ -8,8 +8,6 @@ namespace Jeu_Console_C_
     public class Game
     {
         public Game() { }
-
-        public int Health { get; protected set; }
         public void Team()
         {
             Techmons Gianni = new Techmons("Gianni", 20, TypeElement.Css, 5);
@@ -49,26 +47,6 @@ namespace Jeu_Console_C_
             //Gianni.GagnerExperience(50);
             //Ewen.GagnerExperience(120); // ça devrait suffire pour augmenter de niveau
             //Enzo.GagnerExperience(30);
-
-            // Pour démonstration : Affiche les informations de chaque Pokémon
-            List<Techmons> pokemons = new List<Techmons> { Gianni, Ewen, Enzo, Kyllian, Benjamin, Grégoire };
-            foreach (var pokemon in pokemons)
-            {
-                pokemon.AfficherInformations();
-            }
-        }
-        public void Items()
-        {
-            Inventory inventory = new Inventory();
-
-            Items Potions = new Items("Potion", "Rend 20 PV à un Pokemon", 0);
-            Items TechBalls = new Items("Techball", "Permet de capturer un pokemon", 0);
-
-
-            inventory.AddItems(Potions, 5);
-            inventory.AddItems(TechBalls, 10);
-
-            inventory.DisplayInventorry();
         }
     }
 }

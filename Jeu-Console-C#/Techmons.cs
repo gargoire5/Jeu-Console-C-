@@ -1,4 +1,4 @@
-﻿using System;
+/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -91,6 +91,92 @@ namespace Jeu_Console_C_
             }
 
             Console.WriteLine(); // Ajoute une ligne vide pour la lisibilité
+        }
+        // Dans Techmons.cs
+        public Attaque ChoisirAttaque()
+        {
+            Console.WriteLine($"Choisissez une attaque pour {Name}:");
+            for (int i = 0; i < Attaques.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}: {Attaques[i].Nom} (Dégâts: {Attaques[i].Degats})");
+            }
+            int choix = int.Parse(Console.ReadLine()) - 1;
+            return Attaques[choix];
+        }
+
+        public Attaque ChoisirAttaqueAdversaire()
+        {
+            // Cette méthode simule le choix d'attaque par l'adversaire (IA)
+            Random rnd = new Random();
+            int choix = rnd.Next(Attaques.Count);
+            return Attaques[choix];
+        }
+
+    }
+}
+*/
+using System;
+using System.Collections.Generic;
+
+namespace Jeu_Console_C_
+{
+    public class Techmons : GameObject
+    {
+        // Propriétés déjà définies dans la base GameObject
+        public List<Attaque> Attaque { get; private set; }
+
+        public Techmons(string name, int health, TypeElement type, int niveau) : base(name, health, type, niveau)
+        {
+            Attaques = new List<Attaque>();
+        }
+
+        public void AjouterAttaque(Attaque attaque)
+        {
+            Attaques.Add(attaque);
+        }
+
+        public void GagnerExperience(int exp)
+        {
+            Experience += exp;
+            while (Experience >= ExpPourNiveauSuivant)
+            {
+                Niveau++;
+                Experience -= ExpPourNiveauSuivant;
+                ExpPourNiveauSuivant = CalculerExpPourNiveauSuivant(Niveau);
+                Console.WriteLine($"{Name} a atteint le niveau {Niveau} !");
+            }
+        }
+        public void AfficherAttaques()
+        {
+            Console.WriteLine($"{Name} peut utiliser les attaques suivantes :");
+            for (int i = 0; i < Attaques.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {Attaques[i].Nom} (Dégâts: {Attaques[i].Degats})");
+            }
+        }
+
+        private int CalculerExpPourNiveauSuivant(int niveau)
+        {
+            return 100 * niveau; // Simplification de la formule pour l'exemple
+        }
+
+        public void Attaquer(Techmons adversaire, Attaque attaque)
+        {
+            int degatsEffectifs = attaque.Degats;
+            // Ajoute ici la logique pour calculer les effets de type, les buffs, etc.
+            adversaire.Health -= degatsEffectifs;
+            Console.WriteLine($"{Name} utilise {attaque.Nom} et inflige {degatsEffectifs} points de dégâts à {adversaire.Name}.");
+        }
+
+        // Extension: Affichage des informations du Techmon, incluant les attaques et leurs effets
+        public void AfficherInformations()
+        {
+            Console.WriteLine($"Nom: {Name}, Type: {Type}, Niveau: {Niveau}, PV: {Health}");
+            Console.WriteLine("Attaques disponibles:");
+            foreach (var attaque in Attaques)
+            {
+                Console.WriteLine($"- {attaque.Nom}: Dégâts: {attaque.Degats}, Augmente Dégâts: {attaque.AugmentationDegatsPourcentage}%, Réduit Dégâts Reçus: {attaque.ReductionDegatsRecus * 100}%");
+            }
         }
     }
 }

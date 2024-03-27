@@ -40,16 +40,21 @@ namespace Scenes
     }
     public class SceneGame
     {
-        Model model = new Model();
+        Model model;
+        Player player;
         SceneTeam sceneTeam;
         public SceneGame()
         {
+            model = new Model();
+            player = new Player(15, 15);
             Console.Clear();
-            Console.WriteLine(model.dingus);
+            Console.WriteLine(model.mario);
             Update();
         }
         public void Update()
         {
+            Console.SetCursorPosition(player.playerX, player.playerY);
+            Console.Write("@");
             while (true)
             {
                 InputManager.ReadKey();
@@ -104,33 +109,6 @@ namespace Scenes
             }
         }
     }
-    public class SceneGame
-    {
-        Model model;
-        Player player;
-        public SceneGame()
-        {
-            model = new Model();
-            player = new Player(15,15);
-            Console.Clear();
-            Console.WriteLine(model.mario);
-            Update();
-        }
-        public void Update()
-        {
-            Console.SetCursorPosition(player.playerX, player.playerY);
-            Console.Write("@"); 
-            while (true)
-            {
-                InputManager.ReadKey();
-                
-                if (InputManager.IsKeyPressed(ConsoleKey.M))
-                {
-                    new SceneMap();
-                }
-            }
-        }
-    }
     public class SceneFight
     {
         Model model = new Model();
@@ -177,7 +155,7 @@ namespace Scenes
                     case ConsoleKey.T:
 
                         Console.Clear();
-                        Console.WriteLine(model.dingus);
+                        Console.WriteLine(model.mario);
                         teamActive = false;
                         break;
                     case ConsoleKey.UpArrow:
@@ -228,7 +206,7 @@ namespace Scenes
                 {
                     case ConsoleKey.I:
                         Console.Clear();
-                        Console.WriteLine(model.dingus);
+                        Console.WriteLine(model.mario);
                         inventoryActive = false;
                         break;
                     case ConsoleKey.UpArrow:

@@ -10,14 +10,9 @@ namespace Jeu_Console_C_
         public Game() { }
         public void Team()
         {
-            Techmons Gianni = new Techmons("Gianni", 20, TypeElement.Css, 5);
-            Techmons Ewen = new Techmons("Ewen", 45, TypeElement.Python, 12);
-            Techmons Enzo = new Techmons("Enzo", 12, TypeElement.C, 1);
-            Techmons Kyllian = new Techmons("Kyllian", 62, TypeElement.Python, 17);
-            Techmons Benjamin = new Techmons("Benjamin", 26, TypeElement.C, 7);
-            Techmons Grégoire = new Techmons("Grégoire", 82, TypeElement.Css, 21);
+            
 
-            // Ajout d'attaques pour chaque Pokémon
+            /*Ajout d'attaques pour chaque Pokémon
             Gianni.AjouterAttaque(new Attaque("Le poulet est délicieux", 0, 50));//Boost attaque
             Gianni.AjouterAttaque(new Attaque("Purple", 40, 0, 0));//Attaque
             Gianni.AjouterAttaque(new Attaque("Domain Expansion", 0, 10, 0.4f));//Boost def
@@ -41,7 +36,7 @@ namespace Jeu_Console_C_
             Grégoire.AjouterAttaque(new Attaque("Je construirai un mur", 0, 80, 0.05f));
 
 
-
+            */
             // Simule l'ajout d'expérience
 
             //Gianni.GagnerExperience(50);

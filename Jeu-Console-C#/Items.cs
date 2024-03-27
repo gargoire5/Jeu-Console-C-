@@ -22,12 +22,12 @@ namespace Jeu_Console_C_
             techmons.Health += 20;
             Console.WriteLine($"Vous utilisé {Name} et restaure 20 PV à {techmons.Name}. Sa maintenant de {techmons.Health} PV");
         }
+    }
 
-        public void InfoItem()
+    internal class Potion : Items
+    {
+        public Potion(string name, string effect, int quantity) : base(name, effect, quantity)
         {
-            Console.WriteLine($"Nom: {Name}");
-            Console.WriteLine($"Description: {Effect}");
-            Console.WriteLine();
         }
     }
 }

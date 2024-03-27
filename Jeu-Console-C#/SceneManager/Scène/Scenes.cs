@@ -66,9 +66,7 @@ namespace Scenes
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.I))
                 {
-                   
-                    new SceneInventory(sceneTeam);
-                    
+                    new SceneInventory(sceneTeam);   
                 }
             }
         }
@@ -88,23 +86,49 @@ namespace Scenes
     {
         Game game = new Game();
         Model model = new Model();
+        Team team = new Team();
+
+        Techmons Gianni = new Techmons("Gianni", 20, 20, TypeElement.Css, 5);
+        Techmons Ewen = new Techmons("Ewen", 45, 45, TypeElement.Python, 12);
+        Techmons Enzo = new Techmons("Enzo", 12, 12, TypeElement.C, 1);
+        Techmons Kyllian = new Techmons("Kyllian", 62, 62, TypeElement.Python, 17);
+        Techmons Benjamin = new Techmons("Benjamin", 26, 26, TypeElement.C, 7);
+        Techmons Grégoire = new Techmons("Grégoire", 82, 82, TypeElement.Css, 21);
+
         public SceneTeam()
         {
             Console.Clear();
-            game.Team();
             Update();
         }
         public void Update()
         {
-            int bruh = 0;
-            while (bruh == 0)
+
+            
+            team.AddPokemon(Gianni);
+            team.AddPokemon(Ewen);
+            team.RemoveHp(Gianni, 5);
+
+            bool teamActive = true;
+            while (teamActive)
             {
-                InputManager.ReadKey();
-                if (InputManager.IsKeyPressed(ConsoleKey.T))
+                Console.Clear();
+                team.DisplayTeam();
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+                switch (keyInfo.Key)
                 {
-                    Console.Clear();
-                    Console.WriteLine(model.dingus);
-                    bruh = 1;
+                    case ConsoleKey.T:
+
+                        Console.Clear();
+                        Console.WriteLine(model.dingus);
+                        teamActive = false;
+                        break;
+                    case ConsoleKey.UpArrow:
+                        team.MoveSelectionUp();
+                        break;
+                    case ConsoleKey.DownArrow:
+                        team.MoveSelectionDown();
+                        break;
                 }
             }
         }
@@ -125,7 +149,7 @@ namespace Scenes
         }
         public void Update()
         {
-            Items Potions = new Items("Potion", "Rend 20 PV à un Pokemon", 0);
+            Potion Potions = new Potion("Potion", "Rend 20 PV à un Pokemon", 0);
             Items TechBalls = new Items("Techball", "Permet de capturer un pokemon", 0);
 
             inventory.AddItems(Potions, 5);
@@ -148,6 +172,7 @@ namespace Scenes
                     case ConsoleKey.I:
                         Console.Clear();
                         Console.WriteLine(model.dingus);
+                        inventoryActive = false;
                         break;
                     case ConsoleKey.UpArrow:
                         inventory.MoveSelectionUp();

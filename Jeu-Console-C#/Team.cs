@@ -8,6 +8,7 @@ namespace Jeu_Console_C_
     internal class Team
     {
         private List<Techmons> techmons = new List<Techmons>();
+        private int selectedTechmonsIndex = 0;
 
         public void AddPokemon(Techmons techmon)
         {
@@ -29,13 +30,44 @@ namespace Jeu_Console_C_
             Console.WriteLine($"Le Pokémon {techmon.Name} a été retiré de l'équipe.");
         }
 
-        
+        public void RemoveHp(Techmons techmons, int damage)
+        {
+            techmons.Health -= damage;
+
+            if(techmons.Health < 0)
+            {
+                techmons.Health = 0;
+            }
+        }
+
+        public void MoveSelectionUp()
+        {
+            selectedTechmonsIndex = Math.Max(0, selectedTechmonsIndex - 1);
+        }
+
+        public void MoveSelectionDown()
+        {
+            selectedTechmonsIndex = Math.Min(techmons.Count - 1, selectedTechmonsIndex + 1);
+        }
+
+
         public void DisplayTeam()
         {
             Console.WriteLine("Équipe Pokémon :");
-            foreach (var techmon in techmons)
+            Console.WriteLine();
+
+            for (int i = 0; i < techmons.Count; i++)
             {
-                Console.WriteLine($"- {techmon.Name}");
+
+                if (i == selectedTechmonsIndex)
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                }
+
+                Techmons CurrentTechmon = techmons[i];
+                Console.WriteLine($"{i + 1}. {CurrentTechmon.Name} ({CurrentTechmon.Health}/{CurrentTechmon.MaxHeath}) HP {CurrentTechmon.Type} {CurrentTechmon.Niveau}");
+
+                Console.ResetColor();
             }
         }
     }

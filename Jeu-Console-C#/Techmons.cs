@@ -9,9 +9,12 @@ namespace Jeu_Console_C_
     internal class Techmons : GameObject
     { 
 
-        public Techmons(string name, int health, TypeElement type, int niveau) : base(name, type, niveau)
+        public Techmons(string name, int health, int maxhealth ,TypeElement type, int niveau) : base(name, type, niveau)
         {
             Health = health;
+            MaxHeath = maxhealth;
+            Type = type;
+            Niveau = niveau;
         }
 
         // Méthode pour ajouter une attaque à ce Pokémon

@@ -5,9 +5,6 @@ using System.Text;
 
 namespace Jeu_Console_C_
 {
-
-    
-
     internal class Inventory
     {
         private List<Items> items = new List<Items>();
@@ -77,16 +74,18 @@ namespace Jeu_Console_C_
             }
 
             Items selectedItem = items[selectedItemIndex];
-            //if (selectedItem is Potion potion)
-            //{
-                //Console.WriteLine($"Vous utilisez {potion.Name}.");
-                // Tu peux ajouter ici la logique pour utiliser la potion sur un Pokémon
-            //}
-            //else
-            //{
-                //Console.WriteLine("Cet objet ne peut pas être utilisé.");
-            //}
-            Console.ReadKey(); // Attend une pression de touche pour continuer
+
+            if (selectedItem is Potion potion)
+            {
+                Console.WriteLine($"Vous utilisez {potion.Name}.");
+
+                selectedItem.Quantity -= 1;
+            }
+            else
+            {
+                Console.WriteLine("Cet objet ne peut pas être utilisé.");
+            }
+            Console.ReadKey();
         }
     }
 }

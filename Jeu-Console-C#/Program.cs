@@ -1,14 +1,14 @@
 /*using Jeu_Console_C_;
 using System;
 
-*//*class Program
+
 {
     static void Main(string[] args)
     {
         var sceneManager = new SceneManager();
         sceneManager.Update();
     }
-}*//*
+
 
 class Program
 {
@@ -27,16 +27,16 @@ class Program
             
         }
 
-        // Exemple de comment capturer un Pokémon (tu devras remplacer cela par ta logique de jeu)
+        // Exemple de comment capturer un Pokémon
         //Techmons Gianni = new Techmons("Gianni", 20, TypeElement.Css, 5);
         //joueur.CapturerTechmons(Gianni);
 
-        // Pour afficher les Pokémon capturés
-        *//*Console.WriteLine("Pokémon capturés :");
+        // afficher Pokémon capturé
+        Console.WriteLine("Pokémon capturés :");
         foreach (var Techmons in joueur.TechmonsCaptures)
         {
             Console.WriteLine(Techmons.Name);
-        }*//*
+        }
     }
 }
 
@@ -65,7 +65,7 @@ class Program
     static void InitialiserJeu()
     {
         jeu = new Game();
-        // Ici, tu peux ajouter des initialisations supplémentaires si nécessaire.
+        // initialisations
     }
 
     static void CreerJoueur()
@@ -76,15 +76,6 @@ class Program
         joueur = new Player(nomJoueur);
         Console.WriteLine($"Bonjour, {joueur.Name}!");
     }
-
-    /*static void SelectionnerTechmonsJoueur()
-    {
-        // Exemple simplifié : le joueur sélectionne les deux premiers Techmons disponibles.
-        // Dans un cas réel, tu voudrais afficher une liste et laisser le joueur choisir.
-        joueur.CapturerTechmon(jeu.TechmonsDisponibles[0]);
-        joueur.CapturerTechmon(jeu.TechmonsDisponibles[1]);
-        Console.WriteLine("Vous avez sélectionné vos Techmons pour le combat.");
-    }*/
 
     static void SelectionnerTechmonsJoueur()
     {
@@ -113,7 +104,7 @@ class Program
             if (!int.TryParse(Console.ReadLine(), out choix) || choix < 1 || choix > max || choix == exclusion)
             {
                 Console.WriteLine("Choix invalide, veuillez réessayer.");
-                choix = -1; // Assurez-vous que la boucle continue en cas de choix invalide.
+                choix = -1; // la boucle doit continue en cas de choix invalide.
             }
         }
         while (choix == -1);
@@ -122,7 +113,7 @@ class Program
 
     static void GenererEquipeAdverse()
     {
-        // Exemple simplifié : choisir deux Techmons aléatoires comme adversaires.
+        //deux Techmons aléatoires comme adversaires.
         Random rnd = new Random();
         while (equipeAdverse.Count < 2)
         {
@@ -143,14 +134,14 @@ class Program
     static void DemarrerCombat()
     {
         //Console.WriteLine("Le combat commence !");
-        jeu.DemarrerCombat(joueur, equipeAdverse); // Assure-toi que Game contient une méthode DemarrerCombat.
+        jeu.DemarrerCombat(joueur, equipeAdverse); 
 
         // Après le combat
         Console.WriteLine("Le combat est terminé. Appuyez sur la touche Échap pour quitter ou une autre touche pour continuer.");
         if (Console.ReadKey(true).Key == ConsoleKey.Escape)
         {
-            return; // Quitte le programme si la touche Échap est pressée.
+            return; // Quitte le programme si Echap est appuyer.
         }
-        // Ici, tu pourrais retourner au menu principal ou permettre d'autres actions post-combat.
+        //  retourner au menu principal ou permettre d'autres actions post-combat(capturer pokemon )???
     }
 }

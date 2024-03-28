@@ -126,6 +126,8 @@ namespace Scenes
                     Console.SetCursorPosition(0, 0);
                     Console.WriteLine(model.mario);
                     map = model.mario;
+                    Console.SetCursorPosition(78, 13);
+                    Console.Write("L");
                     if (index == 1590 || index == 1589 || index == 1591)
                     {
                         player.playerX = 75;
@@ -159,6 +161,17 @@ namespace Scenes
                     Console.SetCursorPosition(player.playerX, player.playerY);
                     Console.Write("@");
                     index = player.playerY * 89 + player.playerX;
+                }
+                if (map == model.mario && index == 1148)
+                {
+                    index = (player.playerY - 1) * 89 + player.playerX + 1;
+                    Console.SetCursorPosition(player.playerX, player.playerY);
+                    Console.Write("L");
+                    Console.SetCursorPosition(0, 25) ; 
+                    Console.Write("Leo : \r\nLe jour ou Gianni viendras demander de l'aide a Dylan tu pourras revenir me voir ");
+                    player.playerX--;
+                    Console.SetCursorPosition(player.playerX, player.playerY);
+                    Console.Write("@");
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.T))
                 {

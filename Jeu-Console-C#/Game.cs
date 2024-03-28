@@ -20,7 +20,7 @@ namespace Jeu_Console_C_
             Techmons Benjamin = new Techmons("Benjamin", 26, TypeElement.C, 7);
             Techmons Grégoire = new Techmons("Grégoire", 82, TypeElement.Css, 21);
 
-            // Ajout d'attaques pour chaque Pokémon
+            
             Gianni.AjouterAttaque(new Attaque("Le poulet est délicieux", 0, 50));//Boost attaque
             Gianni.AjouterAttaque(new Attaque("Purple", 40, 0, 0));//Attaque
             Gianni.AjouterAttaque(new Attaque("Domain Expansion", 0, 10, 0.4f));//Boost def
@@ -51,7 +51,7 @@ namespace Jeu_Console_C_
             //Ewen.GagnerExperience(120); // ça devrait suffire pour augmenter de niveau
             //Enzo.GagnerExperience(30);
 
-            // Pour démonstration : Affiche les informations de chaque Pokémon
+            // Affiche les informations de chaque Pokémon
             List<Techmons> pokemons = new List<Techmons> { Gianni, Ewen, Enzo, Kyllian, Benjamin, Grégoire };
             foreach (var pokemon in pokemons)
             {
@@ -64,7 +64,7 @@ namespace Jeu_Console_C_
             Items TechBalls = new Items("Techball", "Permet de capturer un pokemon");
         }
 
-        // Dans Game.cs
+        
         public void DemarrerCombat(Player joueur, List<Techmons> equipeAdverse)
         {
             int techmonActifJoueur = 0;
@@ -79,7 +79,7 @@ namespace Jeu_Console_C_
                 Techmons techmonJoueur = joueur.TechmonsCaptures[techmonActifJoueur];
                 Techmons techmonAdversaire = equipeAdverse[techmonActifAdversaire];
 
-                // Le joueur choisit une attaque
+                // joueur choisit attaque
                 Attaque attaqueJoueur = techmonJoueur.ChoisirAttaque();
                 techmonJoueur.Attaquer(techmonAdversaire, attaqueJoueur);
 
@@ -95,11 +95,11 @@ namespace Jeu_Console_C_
                     }
                 }
 
-                // Vérifie si le combat continue avant de passer au tour de l'adversaire
+                // Vérifie si combat continue avant tour de l'adversaire
                 if (!combatTermine)
                 {
                     Console.WriteLine("\n--- Tour de l'Adversaire ---");
-                    Attaque attaqueAdversaire = techmonAdversaire.ChoisirAttaqueAdversaire(); // Assumer cette méthode choisit aléatoirement
+                    Attaque attaqueAdversaire = techmonAdversaire.ChoisirAttaqueAdversaire(); //choisi aléatoirement
                     techmonAdversaire.Attaquer(techmonJoueur, attaqueAdversaire);
 
                     if (techmonJoueur.Health <= 0)
@@ -119,7 +119,7 @@ namespace Jeu_Console_C_
     }
 }
 
-*//*public class Game
+
 {
     public List<Techmons> TechmonsDisponibles { get; private set; } = new List<Techmons>();
     public List<Items> ItemsDisponibles { get; private set; } = new List<Items>();
@@ -159,7 +159,7 @@ namespace Jeu_Console_C_
 
         private void InitialiserTechmons()
         {
-            // Gianni et ses attaques
+            
             Techmons gianni = new Techmons("Gianni", 100, TypeElement.Css, 1);
             gianni.AjouterAttaque(new Attaque("Le poulet est délicieux", 0, 50));
             gianni.AjouterAttaque(new Attaque("Purple", 40, 0, 0));//Attaque
@@ -167,13 +167,13 @@ namespace Jeu_Console_C_
             gianni.AjouterAttaque(new Attaque("I am Atomic", 70, 0, 0));//Attaque
             TechmonsDisponibles.Add(gianni);
 
-            // Ewen et ses attaques
+            
             Techmons ewen = new Techmons("Ewen", 100, TypeElement.Python, 1);
             ewen.AjouterAttaque(new Attaque("Dictature du délégué", 0, 10, 0.35f));//Debuff ou buff
             ewen.AjouterAttaque(new Attaque("Perdu batard", 50, 0, 0));//Attaque
             TechmonsDisponibles.Add(ewen);
 
-            //Enzo et attaques
+            
             Techmons enzo = new Techmons("Enzo", 100, TypeElement.C, 1);
             enzo.AjouterAttaque(new Attaque("Mais elle a 12ans", 60, 0, 0));// Attaque
             enzo.AjouterAttaque(new Attaque("Je suis un faux cul", 0, 10, 0.5f));// Buff
@@ -217,7 +217,7 @@ namespace Jeu_Console_C_
             else
             {
                 Console.WriteLine("Choix invalide, veuillez réessayer.");
-                return ChoisirTechmon(); // Récursivité pour forcer un choix valide
+                return ChoisirTechmon(); 
             }
         }
 
@@ -259,7 +259,7 @@ namespace Jeu_Console_C_
                         continue; // Reprend le tour sans avancer dans le combat
                 }
 
-                // Tour du joueur
+                
                 Console.WriteLine($"Tour de {joueur.Name} avec {techmonJoueur.Name}:");
                 techmonJoueur.AfficherAttaques();
                 Console.WriteLine("Choisissez une attaque:");
@@ -282,10 +282,17 @@ namespace Jeu_Console_C_
                 if (indexTechmonActuelAdversaire >= equipeAdverse.Count) break;
 
                 // Tour de l'adversaire
-                Console.WriteLine($"Tour de l'adversaire ({techmonAdversaire.Name}):");
-                attaqueChoisie = techmonAdversaire.Attaques[0]; // L'adversaire choisit la première attaque pour simplifier
-                techmonAdversaire.Attaquer(techmonJoueur, attaqueChoisie);
-                Console.WriteLine($"Tour de {techmonAdversaire.Name} || {techmonAdversaire.Name} || {techmonAdversaire.Health} Pv || Niv {techmonAdversaire.Niveau} || Type : {techmonAdversaire.Type} ||:");
+                Console.WriteLine($"Tour de l'adversaire || {techmonAdversaire.Name} || {techmonAdversaire.Health} Pv || Niv {techmonAdversaire.Niveau} || Type : {techmonAdversaire.Type} ||:");
+                Random rnd = new Random();
+                int indexAttaqueAdversaire = rnd.Next(techmonAdversaire.Attaques.Count);
+
+                // Sélectionne l'attaque basée sur l'index aléatoire
+                attaqueChoisie = techmonAdversaire.Attaques[indexAttaqueAdversaire];
+
+                // L'adversaire attaque le Techmon du joueur avec l'attaque sélectionnée
+                techmonAdversaire.Attaquer(techmonJoueur, attaqueChoisie); // L'adversaire choisit la première attaque pour simplifier
+                
+                
 
                 if (techmonJoueur.Health <= 0)
                 {

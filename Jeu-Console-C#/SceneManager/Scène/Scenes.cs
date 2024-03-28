@@ -133,6 +133,7 @@ namespace Scenes
         Techmons Benjamin = new Techmons("Benjamin", 26, 26, TypeElement.C, 7);
         Techmons Grégoire = new Techmons("Grégoire", 82, 82, TypeElement.Css, 21);
 
+        //string jsonTechmons = JsonConvert.SerializeObject(Techmons, Formatting.Indented);
         public SceneTeam()
         {
             Console.Clear();
@@ -140,14 +141,22 @@ namespace Scenes
         }
         public void Update()
         {
+            List<Techmons> techmonsList = new List<Techmons>
+            {
+            Gianni, Ewen, Enzo, Kyllian, Benjamin, Grégoire
+            };
             team.AddPokemon(Gianni);
             team.AddPokemon(Ewen);
             team.RemoveHp(Gianni, 5);
+            string jsonTechmons = JsonConvert.SerializeObject(techmonsList, Formatting.Indented);
 
             bool teamActive = true;
             while (teamActive)
             {
                 Console.Clear();
+                
+                File.WriteAllText("techmons.json", jsonTechmons); // Liste des pokemons avec leurs stats
+                //Console.WriteLine(jsonTechmons);
                 team.DisplayTeam();
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
@@ -165,20 +174,16 @@ namespace Scenes
                     case ConsoleKey.DownArrow:
                         team.MoveSelectionDown();
                         break;
-                    case ConsoleKey.Spacebar:
-                        TeamtoJson(team);
-                        break;
 
                 }
             }
         }
-        private void TeamtoJson(Team team)
-        {
-            string jsonTeam = JsonConvert.SerializeObject(team, Formatting.Indented);
-            File.WriteAllText("teamdata.json", jsonTeam);
-            //File.ReadAllText(jsonTeam);
-            Console.WriteLine("Data is saved on the 'teamdata.json' file");
-        }
+        //private void TeamtoJson(team)
+        //{
+            
+        //    string jsonTechmons = JsonConvert.SerializeObject(team);
+        //    File.WriteAllText("techmonsdata.json", jsonTechmons);
+        //}
 
     }
 
@@ -201,9 +206,10 @@ namespace Scenes
 
             inventory.AddItems(Potions, 5);
             inventory.AddItems(TechBalls, 10);
-            string jsonInventory = JsonConvert.SerializeObject(Potions);
-            //File.WriteAllText("inventorydata.json", jsonInventory);
-            //Console.WriteLine(jsonInventory);
+            string jsonPotion = JsonConvert.SerializeObject(Potions, Formatting.Indented);
+            string jsonTechBalls = JsonConvert.SerializeObject(TechBalls, Formatting.Indented);
+            //File.WriteAllText("inventorydata.json", jsonPotion);
+            //Console.WriteLine(jsonPotion);
 
             inventory.DisplayInventorry();
 
@@ -215,8 +221,10 @@ namespace Scenes
 
                 inventory.DisplayInventorry();
 
-                File.WriteAllText("inventorydata.json", jsonInventory);
-                Console.WriteLine(jsonInventory);
+                File.WriteAllText("potiondata.json", jsonPotion); //Stats des potions
+                //Console.WriteLine(jsonPotion);
+                File.WriteAllText("techballsdata.json", jsonTechBalls); //  Stats des techballs
+                //Console.WriteLine(jsonTechBalls);
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
@@ -234,7 +242,9 @@ namespace Scenes
                         inventory.MoveSelectionDown();
                         break;
                     case ConsoleKey.Enter:
+                        Inventory Potion = JsonConvert.DeserializeObject<Inventory>(jsonPotion);
                         inventory.UseSelectedItem();
+                        string updatedJsonPotion = JsonConvert.SerializeObject(Potions);
                         break;
                 }
             }

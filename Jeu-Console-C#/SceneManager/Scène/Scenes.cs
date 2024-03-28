@@ -202,7 +202,6 @@ namespace Scenes
             Console.Clear();
             inventory.AddItems(potion, 5);
             inventory.AddItems(TechBalls, 10);
-            inventory.CopyFrom(initialItems);
             Update();
         }
 
@@ -286,7 +285,7 @@ namespace Scenes
                                         if (selectedTechmons != null)
                                         {
                                             potion.UsePotion(selectedTechmons);
-                                            inventory.RemoveItems(potion, 1);
+                                            inventory.RemoveSelectedItem();
                                             Console.WriteLine("La potion a été utilisée sur " + selectedTechmons.Name);
                                             selected = true;
                                         }

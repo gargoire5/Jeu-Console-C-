@@ -278,6 +278,7 @@ namespace Jeu_Console_C_
                     {
                         attaqueChoisie = techmonJoueur.Attaques[choix - 1]; // Les indices de liste commencent à 0
                         break; 
+                    }
                     else
                     {
                         Console.WriteLine("Choix invalide. Veuillez sélectionner une attaque valide.");

@@ -176,7 +176,7 @@ namespace Jeu_Console_C_
         public string couloir = @"
                               Couloir                                                  
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                                                     
-@@@                        @     @                                                     
+@@@                        @@@@@@@                                                     
 @@@                              @                                                     
 @@@                              @                                                     
 @@@                        @     @                                                     

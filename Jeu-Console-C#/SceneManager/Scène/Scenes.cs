@@ -45,19 +45,21 @@ namespace Scenes
     {
         Model model;
         Player player;
-        SceneTeam sceneTeam;
         public SceneGame()
         {
             model = new Model();
-            player = new Player(81,16);
+            player = new Player(81, 16);
             Console.Clear();
-            Console.WriteLine(model.couloir);
             Update();
         }
         public void Update()
         {
             string map = model.couloir;
             int index = player.playerY * 89 + player.playerX;
+            SceneTeam sceneTeam = new SceneTeam();
+            SceneInventory sceneInvetory = new SceneInventory();
+            Console.Clear();
+            Console.WriteLine(map);
             Console.SetCursorPosition(player.playerX, player.playerY);
             Console.Write("@");
             while (true)
@@ -128,7 +130,8 @@ namespace Scenes
                     {
                         player.playerX = 75;
                         player.playerY = 3;
-                    }else if (index == 1548 || index == 1547 || index == 1546)
+                    }
+                    else if (index == 1548 || index == 1547 || index == 1546)
                     {
                         player.playerY = 3;
                         player.playerX = 32;
@@ -157,15 +160,13 @@ namespace Scenes
                     Console.Write("@");
                     index = player.playerY * 89 + player.playerX;
                 }
-                    Console.SetCursorPosition(player.playerX, player.playerY);
-                    Console.Write(" ");
-                    player.playerX = player.playerX - +1;
-                    Console.SetCursorPosition(player.playerX, player.playerY);
-                    Console.Write("@");
-                }
                 if (InputManager.IsKeyPressed(ConsoleKey.T))
                 {
-                    sceneTeam = new SceneTeam();
+                    sceneTeam.Update();
+                    Console.WriteLine(map);
+                    Console.SetCursorPosition(player.playerX, player.playerY);
+                    Console.Write("@");
+
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.Escape))
                 {
@@ -173,8 +174,10 @@ namespace Scenes
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.I))
                 {
-
-                    new SceneInventory();
+                    sceneInvetory.Update();
+                    Console.WriteLine(map);
+                    Console.SetCursorPosition(player.playerX, player.playerY);
+                    Console.Write("@");
 
                 }
             }
@@ -206,7 +209,6 @@ namespace Scenes
 
         public SceneTeam()
         {
-            Console.Clear();
             team = new Team(); 
             team.AddPokemon(Gianni);
             team.AddPokemon(Ewen);
@@ -217,8 +219,6 @@ namespace Scenes
             team.RemoveHp(Enzo, 2);
 
             team.DisplayTeam();
-
-            Update();
         }
 
         public Team GetTeam()
@@ -239,7 +239,6 @@ namespace Scenes
                 {
                     case ConsoleKey.T:
                         Console.Clear();
-                        Console.WriteLine(model.mario);
                         teamActive = false;
                         break;
                     case ConsoleKey.UpArrow:
@@ -265,10 +264,8 @@ namespace Scenes
 
         public SceneInventory()
         {
-            Console.Clear();
             inventory.AddItems(potion, 5);
             inventory.AddItems(TechBalls, 10);
-            Update();
         }
 
 
@@ -287,7 +284,7 @@ namespace Scenes
             while (inventActive)
             {
                 Console.Clear();
-                inventory.DisplayInventory();
+                inventory.DisplayInventory(); 
                 Console.WriteLine("Sélectionnez un objet et appuyez sur Entrée pour l'utiliser.");
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
@@ -297,7 +294,6 @@ namespace Scenes
 
                     case ConsoleKey.I:
                         Console.Clear();
-                        Console.WriteLine(model.mario);
                         inventActive = false;
                         break;
                     case ConsoleKey.UpArrow:

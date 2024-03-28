@@ -7,6 +7,35 @@ namespace Jeu_Console_C_
 {
     public class Model
     {
+        public string CenterText(string text)
+        {
+            int screenWidth = Console.WindowWidth;
+            int screenHeight = Console.WindowHeight;
+
+            string[] lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+            int totalLinesHeight = lines.Length;
+            int totalHeight = totalLinesHeight + Environment.NewLine.Length * (totalLinesHeight - 1);
+            int verticalStart = (screenHeight - totalHeight) / 2;
+
+            // Ajustement pour les nombres impairs de lignes
+            if (totalLinesHeight % 2 == 0)
+                verticalStart--;
+
+            int horizontalStart = (screenWidth - lines[0].Length) / 2;
+
+            StringBuilder centered = new StringBuilder();
+
+            foreach (string line in lines)
+            {
+                Console.SetCursorPosition(horizontalStart, verticalStart++);
+                centered.AppendLine(line.PadLeft(horizontalStart + line.Length / 2));
+            }
+
+            return centered.ToString();
+        }
+
+
         public string menu = @"
  _____         _     __  __                 
 |_   _|__  ___| |__ |  \/  | ___  _ __  ___ 
@@ -19,6 +48,7 @@ namespace Jeu_Console_C_
               [P]lay      [Q]uit
 
 ";
+        
         public string dingus = @"                            
                                                                                        +#               
                                                                          .-++------+####.               

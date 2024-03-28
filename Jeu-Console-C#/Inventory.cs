@@ -26,9 +26,17 @@ namespace Jeu_Console_C_
             
         }
 
-        public void RemoveItems(Items item)
+        public void RemoveSelectedItem()
         {
-            items.Remove(item);
+            if (selectedItemIndex >= 0 && selectedItemIndex < items.Count)
+            {
+                items.RemoveAt(selectedItemIndex);
+                selectedItemIndex = 0;
+            }
+            else
+            {
+                Console.WriteLine("Aucun élément sélectionné.");
+            }
         }
 
         public int countItem(Items itemType)
@@ -66,27 +74,15 @@ namespace Jeu_Console_C_
             selectedItemIndex = Math.Min(items.Count - 1, selectedItemIndex + 1);
         }
 
-        public Items UseSelectedItem(SceneTeam sceneTeam)
+        public Items GetSelectedItem()
         {
-            if (items.Count == 0)
+            if (selectedItemIndex >= 0 && selectedItemIndex < items.Count)
             {
-                Console.WriteLine("L'inventaire est vide.");
-                return null;
+                return items[selectedItemIndex];
             }
-
-            Items selectedItem = items[selectedItemIndex];
-
-            
-
-            if (selectedItem is Potion potion)
-            {
-                sceneTeam.ApplyPotionToSelectedTechmons(potion);
-                return selectedItem;
-            }
-            
             else
             {
-                Console.WriteLine("Cet objet ne peut pas être utilisé.");
+                Console.WriteLine("Aucun élément sélectionné.");
                 return null;
             }
         }

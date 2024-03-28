@@ -12,20 +12,30 @@ namespace Jeu_Console_C_
             int screenWidth = Console.WindowWidth;
             int screenHeight = Console.WindowHeight;
 
-            string[] lines = text.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+            string[] lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
-            int verticalStart = (screenHeight - lines.Length) / 2;
+            int totalLinesHeight = lines.Length;
+            int totalHeight = totalLinesHeight + Environment.NewLine.Length * (totalLinesHeight - 1);
+            int verticalStart = (screenHeight - totalHeight) / 2;
+
+            // Ajustement pour les nombres impairs de lignes
+            if (totalLinesHeight % 2 == 0)
+                verticalStart--;
+
             int horizontalStart = (screenWidth - lines[0].Length) / 2;
 
             StringBuilder centered = new StringBuilder();
 
             foreach (string line in lines)
             {
-                centered.Append(line.PadLeft(horizontalStart + line.Length / 2));
+                Console.SetCursorPosition(horizontalStart, verticalStart++);
+                centered.AppendLine(line.PadLeft(horizontalStart + line.Length / 2));
             }
 
             return centered.ToString();
         }
+
+
         public string menu = @"
  _____         _     __  __                 
 |_   _|__  ___| |__ |  \/  | ___  _ __  ___ 

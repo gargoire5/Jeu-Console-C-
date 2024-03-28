@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,13 +45,15 @@ namespace Scenes
         public SceneGame()
         {
             model = new Model();
-            player = new Player(15,15);
+            player = new Player(81,16);
             Console.Clear();
-            Console.WriteLine(model.mario);
+            Console.WriteLine(model.couloir);
             Update();
         }
         public void Update()
         {
+            string map = model.couloir;
+            int index = player.playerY * 89 + player.playerX;
             Console.SetCursorPosition(player.playerX, player.playerY);
             Console.Write("@"); 
             while (true)
@@ -58,39 +61,94 @@ namespace Scenes
                 InputManager.ReadKey();
                 if (InputManager.IsKeyPressed(ConsoleKey.Z))
                 {
-                    Console.SetCursorPosition(player.playerX, player.playerY);
-                    Console.Write(" ");
-                    player.playerY = player.playerY - 1;
-                    Console.SetCursorPosition(player.playerX, player.playerY);
-                    Console.Write("@");
+                    index = (player.playerY - 2) * 89 + player.playerX + 2;
+                    if (map[index] == ' ')
+                    {
+                        Console.SetCursorPosition(player.playerX, player.playerY);
+                        Console.Write(index);
+                        player.playerY = player.playerY - 1;
+                        Console.SetCursorPosition(player.playerX, player.playerY);
+                        Console.Write("@");
+                    }
+
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.S))
                 {
-                    Console.SetCursorPosition(player.playerX, player.playerY);
-                    Console.Write(" ");
-                    player.playerY = player.playerY + 1;
-                    Console.SetCursorPosition(player.playerX, player.playerY);
-                    Console.Write("@");
+                    index = (player.playerY) * 89 + player.playerX + 2;
+                    if (map[index] == ' ')
+                    {
+                        Console.SetCursorPosition(player.playerX, player.playerY);
+                        Console.Write(' ');
+                        player.playerY = player.playerY + 1;
+                        Console.SetCursorPosition(player.playerX, player.playerY);
+                        Console.Write("@");
+                    }
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.D))
                 {
-                    Console.SetCursorPosition(player.playerX, player.playerY);
-                    Console.Write(" ");
-                    player.playerX = player.playerX + 1;
-                    Console.SetCursorPosition(player.playerX, player.playerY);
-                    Console.Write("@");
+                    index = (player.playerY - 1) * 89 + player.playerX + 3;
+                    if (map[index] == ' ')
+                    {
+                        Console.SetCursorPosition(player.playerX, player.playerY);
+                        Console.Write(' ');
+                        player.playerX++;
+                        Console.SetCursorPosition(player.playerX, player.playerY);
+                        Console.Write("@");
+                    }
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.Q))
                 {
-                    Console.SetCursorPosition(player.playerX, player.playerY);
-                    Console.Write(" ");
-                    player.playerX = player.playerX -+ 1;
-                    Console.SetCursorPosition(player.playerX, player.playerY);
-                    Console.Write("@");
+                    index = (player.playerY - 1) * 89 + player.playerX + 1;
+                    if (map[index] == ' ')
+                    {
+                        Console.SetCursorPosition(player.playerX, player.playerY);
+                        Console.Write(' ');
+                        player.playerX--;
+                        Console.SetCursorPosition(player.playerX, player.playerY);
+                        Console.Write("@");
+                    }
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.M))
                 {
                     new SceneMap();
+                }
+                if (map == model.couloir && index == 1590 || index == 1589 || index == 1591 || index == 1548 || index == 1547 || index == 1546)
+                {
+                    Console.SetCursorPosition(0, 0);
+                    Console.WriteLine(model.mario);
+                    map = model.mario;
+                    if (index == 1590 || index == 1589 || index == 1591)
+                    {
+                        player.playerX = 75;
+                        player.playerY = 3;
+                    }else if (index == 1548 || index == 1547 || index == 1546)
+                    {
+                        player.playerY = 3;
+                        player.playerX = 32;
+                    }
+                    Console.SetCursorPosition(player.playerX, player.playerY);
+                    Console.Write("@");
+                    index = player.playerY * 89 + player.playerX;
+                }
+                if (map == model.mario && index == 166 || index == 167 || index == 165 || index == 122 || index == 123 || index == 124)
+                {
+                    Console.SetCursorPosition(0, 0);
+                    Console.Clear();
+                    Console.WriteLine(model.couloir);
+                    map = model.couloir;
+                    if (index == 166 || index == 167 || index == 165)
+                    {
+                        player.playerX = 75;
+                        player.playerY = 17;
+                    }
+                    else if (index == 122 || index == 123 || index == 124)
+                    {
+                        player.playerY = 17;
+                        player.playerX = 32;
+                    }
+                    Console.SetCursorPosition(player.playerX, player.playerY);
+                    Console.Write("@");
+                    index = player.playerY * 89 + player.playerX;
                 }
             }
         }

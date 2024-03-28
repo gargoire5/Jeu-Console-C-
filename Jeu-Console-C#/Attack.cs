@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,7 @@ namespace Jeu_Console_C_
         public string Nom { get; set; }
         public int Degats { get; set; }
 
-        public int ModificateurDegatsSuivant { get; set; } // Pour augmenter les dégâts de la prochaine attaque
+        //public float ModificateurDegatsSuivant { get; set; } // Pour augmenter les dégâts de la prochaine attaque
         public float AugmentationDegatsPourcentage { get; set; }
         public float ReductionDegatsRecus { get; set; } // Pourcentage de réduction des dégâts de la prochaine attaque reçue
 

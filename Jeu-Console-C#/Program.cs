@@ -77,32 +77,72 @@ class Program
         Console.WriteLine($"Bonjour, {joueur.Name}!");
     }
 
-    static void SelectionnerTechmonsJoueur()
+    /*static void SelectionnerTechmonsJoueur()
     {
         // Exemple simplifié : le joueur sélectionne les deux premiers Techmons disponibles.
         // Dans un cas réel, tu voudrais afficher une liste et laisser le joueur choisir.
         joueur.CapturerTechmon(jeu.TechmonsDisponibles[0]);
         joueur.CapturerTechmon(jeu.TechmonsDisponibles[1]);
         Console.WriteLine("Vous avez sélectionné vos Techmons pour le combat.");
+    }*/
+
+    static void SelectionnerTechmonsJoueur()
+    {
+        Console.WriteLine("Choisissez deux Techmons pour votre équipe (entrez le numéro) :");
+
+        for (int i = 0; i < jeu.TechmonsDisponibles.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {jeu.TechmonsDisponibles[i].Name}");
+        }
+
+        int choix1 = ObtenirChoixJoueur(jeu.TechmonsDisponibles.Count);
+        int choix2 = ObtenirChoixJoueur(jeu.TechmonsDisponibles.Count, choix1);
+
+        joueur.CapturerTechmon(jeu.TechmonsDisponibles[choix1 - 1]);
+        joueur.CapturerTechmon(jeu.TechmonsDisponibles[choix2 - 1]);
+
+        Console.WriteLine("Vous avez sélectionné vos Techmons pour le combat.");
+    }
+
+    static int ObtenirChoixJoueur(int max, int exclusion = -1)
+    {
+        int choix;
+        do
+        {
+            Console.WriteLine("Entrez le numéro de votre choix :");
+            if (!int.TryParse(Console.ReadLine(), out choix) || choix < 1 || choix > max || choix == exclusion)
+            {
+                Console.WriteLine("Choix invalide, veuillez réessayer.");
+                choix = -1; // Assurez-vous que la boucle continue en cas de choix invalide.
+            }
+        }
+        while (choix == -1);
+        return choix;
     }
 
     static void GenererEquipeAdverse()
     {
         // Exemple simplifié : choisir deux Techmons aléatoires comme adversaires.
+        Random rnd = new Random();
         while (equipeAdverse.Count < 2)
         {
             Techmons adversaire = jeu.TechmonsDisponibles[rnd.Next(jeu.TechmonsDisponibles.Count)];
             if (!equipeAdverse.Contains(adversaire))
             {
                 equipeAdverse.Add(adversaire);
+                Console.WriteLine($"Adversaire choisi : {adversaire.Name}");
             }
         }
         Console.WriteLine("Une équipe adverse a été générée.");
+        /*foreach (Techmons techmon in equipeAdverse)
+        {
+            Console.WriteLine(techmon.Name);
+        }*/
     }
 
     static void DemarrerCombat()
     {
-        Console.WriteLine("Le combat commence !");
+        //Console.WriteLine("Le combat commence !");
         jeu.DemarrerCombat(joueur, equipeAdverse); // Assure-toi que Game contient une méthode DemarrerCombat.
 
         // Après le combat

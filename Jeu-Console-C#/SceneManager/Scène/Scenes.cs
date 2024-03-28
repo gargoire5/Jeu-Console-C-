@@ -201,6 +201,9 @@ namespace Scenes
 
             inventory.AddItems(Potions, 5);
             inventory.AddItems(TechBalls, 10);
+            string jsonInventory = JsonConvert.SerializeObject(Potions);
+            //File.WriteAllText("inventorydata.json", jsonInventory);
+            //Console.WriteLine(jsonInventory);
 
             inventory.DisplayInventorry();
 
@@ -211,6 +214,9 @@ namespace Scenes
                 Console.Clear();
 
                 inventory.DisplayInventorry();
+
+                File.WriteAllText("inventorydata.json", jsonInventory);
+                Console.WriteLine(jsonInventory);
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
@@ -233,7 +239,6 @@ namespace Scenes
                 }
             }
 
-            
         }
 
     }

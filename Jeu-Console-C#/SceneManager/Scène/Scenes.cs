@@ -65,7 +65,7 @@ namespace Scenes
                     if (map[index] == ' ')
                     {
                         Console.SetCursorPosition(player.playerX, player.playerY);
-                        Console.Write(index);
+                        Console.Write(' ');
                         player.playerY = player.playerY - 1;
                         Console.SetCursorPosition(player.playerX, player.playerY);
                         Console.Write("@");

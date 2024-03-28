@@ -259,13 +259,33 @@ namespace Jeu_Console_C_
                         continue; // Reprend le tour sans avancer dans le combat
                 }
 
-                
-                Console.WriteLine($"Tour de {joueur.Name} avec {techmonJoueur.Name}:");
+
+                /*Console.WriteLine($"Tour de {joueur.Name} avec {techmonJoueur.Name}:");
                 techmonJoueur.AfficherAttaques();
                 Console.WriteLine("Choisissez une attaque:");
                 int choix = int.Parse(Console.ReadLine()) - 1;
                 Attaque attaqueChoisie = techmonJoueur.Attaques[choix];
+                techmonJoueur.Attaquer(techmonAdversaire, attaqueChoisie);*/
+                Console.WriteLine($"Tour de {joueur.Name} avec {techmonJoueur.Name} (PV: {techmonJoueur.Health}):");
+                techmonJoueur.AfficherAttaques();
+                int choix;
+                Attaque attaqueChoisie;
+
+                while (true) 
+                {
+                    Console.WriteLine("Choisissez une attaque:");
+                    if (int.TryParse(Console.ReadLine(), out choix) && choix > 0 && choix <= techmonJoueur.Attaques.Count)
+                    {
+                        attaqueChoisie = techmonJoueur.Attaques[choix - 1]; // Les indices de liste commencent à 0
+                        break; 
+                    else
+                    {
+                        Console.WriteLine("Choix invalide. Veuillez sélectionner une attaque valide.");
+                    }
+                }
+
                 techmonJoueur.Attaquer(techmonAdversaire, attaqueChoisie);
+
 
                 if (techmonAdversaire.Health <= 0)
                 {

@@ -68,8 +68,6 @@ namespace Jeu_Console_C_
 
         public Items UseSelectedItem(SceneTeam sceneTeam)
         {
-
-
             if (items.Count == 0)
             {
                 Console.WriteLine("L'inventaire est vide.");
@@ -78,17 +76,19 @@ namespace Jeu_Console_C_
 
             Items selectedItem = items[selectedItemIndex];
 
+            
+
             if (selectedItem is Potion potion)
             {
                 sceneTeam.ApplyPotionToSelectedTechmons(potion);
                 return selectedItem;
             }
+            
             else
             {
                 Console.WriteLine("Cet objet ne peut pas être utilisé.");
                 return null;
             }
-            Console.ReadKey();
         }
 
     }

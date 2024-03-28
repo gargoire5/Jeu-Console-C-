@@ -17,7 +17,8 @@ namespace Scenes
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
             model = new Model();
-            Console.WriteLine(model.menu);
+            string centeredMenu = model.CenterText(model.menu);
+            Console.WriteLine(centeredMenu);
             Update();
         }
         public void Update()
@@ -47,7 +48,7 @@ namespace Scenes
     {
         Model model;
         Player player;
-        private SceneTeam sceneTeam;
+        SceneTeam? sceneTeam = null;
         public SceneGame()
         {
             model = new Model();
@@ -70,6 +71,7 @@ namespace Scenes
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.T))
                 {
+                    Console.Clear() ;
                     sceneTeam = new SceneTeam();
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.Escape))
@@ -139,29 +141,34 @@ namespace Scenes
         Techmons Kyllian = new Techmons("Kyllian", 62, 62, TypeElement.Python, 17);
         Techmons Benjamin = new Techmons("Benjamin", 26, 26, TypeElement.C, 7);
         Techmons Grégoire = new Techmons("Grégoire", 82, 82, TypeElement.Css, 21);
-        
+        Potion potion = new Potion("Potion", "Rend 20 PV à un Pokemon", 0);
+
         public SceneTeam()
         {
             Console.Clear();
+            team.AddPokemon(Gianni);
+            team.AddPokemon(Ewen);
+            team.AddPokemon(Enzo);
+            team.RemoveHp(Gianni, 5);
+            team.RemoveHp(Ewen, 12);
+            team.RemoveHp(Enzo, 2);
             Update();
         }
         public void ApplyPotionToSelectedTechmons(Potion potion)
         {
-
             Techmons selectedTechmons = team.GetSelectedTechmons();
 
             potion.UsePotion(selectedTechmons);
 
+            potion.Quantity -= 1;
+
             Update();
+
+            
         }
 
         public void Update()
         {
-
-            team.AddPokemon(Gianni);
-            team.AddPokemon(Ewen);
-            team.RemoveHp(Gianni, 5);
-            
             bool teamActive = true;
             while (teamActive)
             {
@@ -172,7 +179,6 @@ namespace Scenes
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.T:
-
                         Console.Clear();
                         Console.WriteLine(model.mario);
                         teamActive = false;
@@ -182,6 +188,9 @@ namespace Scenes
                         break;
                     case ConsoleKey.DownArrow:
                         team.MoveSelectionDown();
+                        break;
+                    case ConsoleKey.Enter:
+                        ApplyPotionToSelectedTechmons(potion);
                         break;
                 }
             }
@@ -194,7 +203,9 @@ namespace Scenes
         Game game = new Game();
         Model model = new Model();
         Inventory inventory = new Inventory();
-        private SceneTeam sceneTeam;
+        SceneTeam sceneTeam;
+        Potion potion = new Potion("Potion", "Rend 20 PV à un Pokemon", 0);
+        Items TechBalls = new Items("Techball", "Permet de capturer un pokemon", 0);
 
         public SceneInventory(SceneTeam sceneTeam)
         {
@@ -212,10 +223,7 @@ namespace Scenes
 
         public void Update()
         {
-            Potion Potions = new Potion("Potion", "Rend 20 PV à un Pokemon", 0);
-            Items TechBalls = new Items("Techball", "Permet de capturer un pokemon", 0);
-
-            inventory.AddItems(Potions, 5);
+            inventory.AddItems(potion, 5);
             inventory.AddItems(TechBalls, 10);
 
             bool inventActive = true;
@@ -232,7 +240,6 @@ namespace Scenes
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.I:
-
                         Console.Clear();
                         Console.WriteLine(model.mario);
                         inventActive = false;

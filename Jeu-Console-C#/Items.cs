@@ -19,8 +19,21 @@ namespace Jeu_Console_C_
 
         public virtual void UsePotion(Techmons techmons)
         {
-            techmons.Health += 20;
-            Console.WriteLine($"Vous utilisé {Name} et restaure 20 PV à {techmons.Name}. Sa maintenant de {techmons.Health} PV");
+            int restoredHealth = 20;
+
+            if (techmons.Health < techmons.MaxHeath)
+            {
+                restoredHealth = Math.Min(techmons.MaxHeath - techmons.Health, restoredHealth);
+
+                techmons.Health += restoredHealth;
+
+                Console.WriteLine($"La potion a restauré {restoredHealth} HP à {techmons.Name}");
+            }
+            else
+            {
+                Console.WriteLine($"{techmons.Name} n'a pas besoin de restauré ces HP");
+            }
+            
         }
     }
 

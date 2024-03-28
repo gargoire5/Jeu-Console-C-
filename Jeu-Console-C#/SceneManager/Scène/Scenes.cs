@@ -168,7 +168,7 @@ namespace Scenes
                     Console.SetCursorPosition(player.playerX, player.playerY);
                     Console.Write("L");
                     Console.SetCursorPosition(0, 25) ; 
-                    Console.Write("Leo : \r\nLe jour ou Gianni viendras demander de l'aide a Dylan tu pourras revenir me voir ");
+                    Console.Write("Leo : \r\n\r\n   Le jour ou Gianni viendras demander de l'aide a Dylan tu pourras revenir me voir ");
                     player.playerX--;
                     Console.SetCursorPosition(player.playerX, player.playerY);
                     Console.Write("@");

@@ -59,7 +59,7 @@ namespace Scenes
             while (true)
             {
                 InputManager.ReadKey();
-                if (InputManager.IsKeyPressed(ConsoleKey.Z))
+                if (InputManager.IsKeyPressed(ConsoleKey.Z) || InputManager.IsKeyPressed(ConsoleKey.UpArrow))
                 {
                     index = (player.playerY - 2) * 89 + player.playerX + 2;
                     if (map[index] == ' ')
@@ -72,7 +72,7 @@ namespace Scenes
                     }
 
                 }
-                if (InputManager.IsKeyPressed(ConsoleKey.S))
+                if (InputManager.IsKeyPressed(ConsoleKey.S) || InputManager.IsKeyPressed(ConsoleKey.DownArrow))
                 {
                     index = (player.playerY) * 89 + player.playerX + 2;
                     if (map[index] == ' ')
@@ -84,7 +84,7 @@ namespace Scenes
                         Console.Write("@");
                     }
                 }
-                if (InputManager.IsKeyPressed(ConsoleKey.D))
+                if (InputManager.IsKeyPressed(ConsoleKey.D) || InputManager.IsKeyPressed(ConsoleKey.RightArrow))
                 {
                     index = (player.playerY - 1) * 89 + player.playerX + 3;
                     if (map[index] == ' ')
@@ -96,7 +96,7 @@ namespace Scenes
                         Console.Write("@");
                     }
                 }
-                if (InputManager.IsKeyPressed(ConsoleKey.Q))
+                if (InputManager.IsKeyPressed(ConsoleKey.Q) || InputManager.IsKeyPressed(ConsoleKey.LeftArrow))
                 {
                     index = (player.playerY - 1) * 89 + player.playerX + 1;
                     if (map[index] == ' ')
@@ -110,7 +110,10 @@ namespace Scenes
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.M))
                 {
-                    new SceneMap();
+                    new SceneMap(map);
+                    Console.SetCursorPosition(player.playerX, player.playerY);
+                    Console.Write("@");
+
                 }
                 if (map == model.couloir && index == 1590 || index == 1589 || index == 1591 || index == 1548 || index == 1547 || index == 1546)
                 {
@@ -165,15 +168,17 @@ namespace Scenes
     public class SceneMap
     {
         Model model;
-        public SceneMap()
+        public SceneMap(string Map)
         {
             model = new Model();
+            string map = Map;
             Console.Clear();
             Console.WriteLine(model.map);
-            Update();
+            Update(map);
         }
-        public void Update()
+        public void Update(string Map)
         {
+            string map = Map;
             int bruh = 0;
             while (bruh == 0)
             {
@@ -181,7 +186,7 @@ namespace Scenes
                 if (InputManager.IsKeyPressed(ConsoleKey.M))
                 {
                     Console.Clear();
-                    Console.WriteLine(model.mario);
+                    Console.WriteLine(map);
                     bruh = 1;
                 }
             }

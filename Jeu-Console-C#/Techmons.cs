@@ -96,5 +96,7 @@ namespace Jeu_Console_C_
 
             Console.WriteLine(); // Ajoute une ligne vide pour la lisibilité
         }
+
+
     }
 }

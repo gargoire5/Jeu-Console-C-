@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scenes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,12 @@ namespace Jeu_Console_C_
             }
         }
 
-        
+        public void ClearTeamDisplay()
+        {
+            Console.Clear();
+        }
+
+
         public void RemovePokemon(Techmons techmon)
         {
             techmons.Remove(techmon);
@@ -50,6 +56,25 @@ namespace Jeu_Console_C_
             selectedTechmonsIndex = Math.Min(techmons.Count - 1, selectedTechmonsIndex + 1);
         }
 
+        public Techmons GetSelectedTechmons()
+        {
+            if (techmons.Count == 0)
+            {
+                Console.WriteLine("L'équipe est vide.");
+                return null;
+            }
+
+            // Vérifie que l'index sélectionné est dans les limites de l'équipe
+            if (selectedTechmonsIndex >= 0 && selectedTechmonsIndex < techmons.Count)
+            {
+                return techmons[selectedTechmonsIndex];
+            }
+            else
+            {
+                Console.WriteLine("Aucun Pokémon sélectionné.");
+                return null;
+            }
+        }
 
         public void DisplayTeam()
         {

@@ -11,6 +11,7 @@ namespace Scenes
     public class SceneMenu
     {
         Model model;
+
         public SceneMenu()
         {
             Console.Clear();
@@ -21,6 +22,8 @@ namespace Scenes
         }
         public void Update()
         {
+            
+            
             int bruh = 0;
             while (bruh == 0)
             {
@@ -28,8 +31,10 @@ namespace Scenes
                 InputManager.ReadKey();
                 if (InputManager.IsKeyPressed(ConsoleKey.P))
                 {
+                    bruh = 1;
                     new SceneGame();
                 }
+                
                 if (InputManager.IsKeyPressed(ConsoleKey.Q))
                 {
                     bruh = 1;
@@ -38,17 +43,18 @@ namespace Scenes
 
         }
     }
-    public class SceneGame
+    internal class SceneGame
     {
         Model model;
         Player player;
-        SceneTeam sceneTeam;
+        private SceneTeam sceneTeam;
         public SceneGame()
         {
             model = new Model();
             player = new Player(15, 15);
             Console.Clear();
             Console.WriteLine(model.mario);
+
             Update();
         }
         public void Update()
@@ -72,7 +78,9 @@ namespace Scenes
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.I))
                 {
-                    new SceneInventory(sceneTeam);   
+
+                    new SceneInventory(sceneTeam);
+
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.Z))
                 {
@@ -119,7 +127,7 @@ namespace Scenes
 
     }
 
-    public class SceneTeam
+    internal class SceneTeam
     {
         Game game = new Game();
         Model model = new Model();
@@ -131,18 +139,29 @@ namespace Scenes
         Techmons Kyllian = new Techmons("Kyllian", 62, 62, TypeElement.Python, 17);
         Techmons Benjamin = new Techmons("Benjamin", 26, 26, TypeElement.C, 7);
         Techmons Grégoire = new Techmons("Grégoire", 82, 82, TypeElement.Css, 21);
-
+        
         public SceneTeam()
         {
             Console.Clear();
             Update();
         }
+        public void ApplyPotionToSelectedTechmons(Potion potion)
+        {
+
+            Techmons selectedTechmons = team.GetSelectedTechmons();
+
+            potion.UsePotion(selectedTechmons);
+
+            Update();
+        }
+
         public void Update()
         {
+
             team.AddPokemon(Gianni);
             team.AddPokemon(Ewen);
             team.RemoveHp(Gianni, 5);
-
+            
             bool teamActive = true;
             while (teamActive)
             {
@@ -170,18 +189,27 @@ namespace Scenes
 
     }
 
-    public class SceneInventory
+    internal class SceneInventory
     {
         Game game = new Game();
         Model model = new Model();
         Inventory inventory = new Inventory();
         private SceneTeam sceneTeam;
+
         public SceneInventory(SceneTeam sceneTeam)
         {
             Console.Clear();
-            this.sceneTeam = sceneTeam;
-            Update();
+            if (sceneTeam != null)
+            {
+                this.sceneTeam = sceneTeam;
+                Update();
+            }
+            else
+            {
+                Console.WriteLine("Erreur: SceneTeam n'est pas initialisé.");
+            }
         }
+
         public void Update()
         {
             Potion Potions = new Potion("Potion", "Rend 20 PV à un Pokemon", 0);
@@ -190,24 +218,24 @@ namespace Scenes
             inventory.AddItems(Potions, 5);
             inventory.AddItems(TechBalls, 10);
 
-            inventory.DisplayInventorry();
+            bool inventActive = true;
 
-            bool inventoryActive = true;
-
-            while (inventoryActive)
+            // Afficher l'inventaire et gérer les interactions avec l'utilisateur
+            while (inventActive)
             {
                 Console.Clear();
-
-                inventory.DisplayInventorry();
+                inventory.DisplayInventory();
+                Console.WriteLine("Sélectionnez un objet et appuyez sur Entrée pour l'utiliser.");
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.I:
+
                         Console.Clear();
                         Console.WriteLine(model.mario);
-                        inventoryActive = false;
+                        inventActive = false;
                         break;
                     case ConsoleKey.UpArrow:
                         inventory.MoveSelectionUp();
@@ -216,15 +244,20 @@ namespace Scenes
                         inventory.MoveSelectionDown();
                         break;
                     case ConsoleKey.Enter:
-                        inventory.UseSelectedItem();
+                        Items selectedItem = inventory.UseSelectedItem(sceneTeam);
+                        if (selectedItem == null)
+                        {
+                            Console.WriteLine("Cet objet ne peut pas être utilisé.");
+                        }
                         break;
+
+                    case ConsoleKey.Escape:
+                        return;
                 }
             }
-
-            
         }
-
     }
+
 
     public class SceneMap
     {

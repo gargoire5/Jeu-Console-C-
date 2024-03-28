@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scenes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,7 @@ namespace Jeu_Console_C_
             return items.Count(items => items.GetType() == itemType.GetType());
         }
 
-        public void DisplayInventorry()
+        public void DisplayInventory()
         {
             Console.WriteLine("Inventaire :");
             Console.WriteLine();
@@ -65,27 +66,30 @@ namespace Jeu_Console_C_
             selectedItemIndex = Math.Min(items.Count - 1, selectedItemIndex + 1);
         }
 
-        public void UseSelectedItem()
+        public Items UseSelectedItem(SceneTeam sceneTeam)
         {
+
+
             if (items.Count == 0)
             {
                 Console.WriteLine("L'inventaire est vide.");
-                return;
+                return null;
             }
 
             Items selectedItem = items[selectedItemIndex];
 
             if (selectedItem is Potion potion)
             {
-                Console.WriteLine($"Vous utilisez {potion.Name}.");
-
-                selectedItem.Quantity -= 1;
+                sceneTeam.ApplyPotionToSelectedTechmons(potion);
+                return selectedItem;
             }
             else
             {
                 Console.WriteLine("Cet objet ne peut pas être utilisé.");
+                return null;
             }
             Console.ReadKey();
         }
+
     }
 }

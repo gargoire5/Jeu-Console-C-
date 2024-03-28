@@ -13,14 +13,14 @@ namespace Jeu_Console_C_
 
         }
 
-        // Méthode pour ajouter une attaque à ce Pokémon
+        // ajouter une attaque à Pokémon
         public void AjouterAttaque(Attaque attaque)
 
         {
             Attaques.Add(attaque);
         }
 
-        // Méthode pour gagner de l'expérience et potentiellement augmenter de niveau
+        //gagner expérience et peut etre augmenter de niveau
         public void GagnerExperience(int exp)
 
         {
@@ -39,26 +39,25 @@ namespace Jeu_Console_C_
         {
             int degatsBase = attaque.Degats;
 
-            // Si l'attaque courante bénéficie d'un bonus de dégâts de la précédente attaque
+            
             degatsBase += this.ModificateurDegatsSuivant;
 
-            // Calculer l'augmentation des dégâts en pourcentage
             float augmentation = 1 + (attaque.AugmentationDegatsPourcentage / 100.0f);
             int degatsEffectifs = (int)(degatsBase * augmentation);
 
-            // Appliquer la réduction des dégâts basée sur l'adversaire (si pertinent)
+            
             degatsEffectifs = (int)(degatsEffectifs * (1 - adversaire.ReductionDegatsRecus));
 
-            // Réinitialiser les modificateurs après leur utilisation
+            
             this.ModificateurDegatsSuivant = 0;
             adversaire.ReductionDegatsRecus = 0;
 
-            // Appliquer les dégâts à l'adversaire
+           
             adversaire.Health -= degatsEffectifs;
 
             Console.WriteLine($"{this.Name} utilise {attaque.Nom} sur {adversaire.Name}, infligeant {degatsEffectifs} dégâts.");
 
-            // Mettre à jour les modificateurs pour les prochaines attaques basées sur l'attaque utilisée
+            
             this.ModificateurDegatsSuivant += attaque.ModificateurDegatsSuivant;
             adversaire.ReductionDegatsRecus += attaque.ReductionDegatsRecus;
         }
@@ -90,9 +89,9 @@ namespace Jeu_Console_C_
                 Console.WriteLine($"- {attaque.Nom} ({descriptionEffets})");
             }
 
-            Console.WriteLine(); // Ajoute une ligne vide pour la lisibilité
+            Console.WriteLine(); //ajoute ligne pour visibilite
         }
-        // Dans Techmons.cs
+        
         public Attaque ChoisirAttaque()
         {
             Console.WriteLine($"Choisissez une attaque pour {Name}:");
@@ -106,7 +105,7 @@ namespace Jeu_Console_C_
 
         public Attaque ChoisirAttaqueAdversaire()
         {
-            // Cette méthode simule le choix d'attaque par l'adversaire (IA)
+            //choix d'attaque par l'adversaire (IA)
             Random rnd = new Random();
             int choix = rnd.Next(Attaques.Count);
             return Attaques[choix];
@@ -122,7 +121,7 @@ namespace Jeu_Console_C_
 {
     public class Techmons : GameObject
     {
-        // Propriétés déjà définies dans la base GameObject
+        // Propriétés déjà définies dans la base GameObject je crois
         
         public List<Attaque> Attaque { get; private set; }
 
@@ -161,13 +160,13 @@ namespace Jeu_Console_C_
 
         private int CalculerExpPourNiveauSuivant(int niveau)
         {
-            return 100 * niveau; // Simplification de la formule pour l'exemple
+            return 100 * niveau; // Simplification pour l'exemple
         }
 
         /*public void Attaquer(Techmons adversaire, Attaque attaque)
         {
             int degatsEffectifs = attaque.Degats;
-            // Ajoute ici la logique pour calculer les effets de type, les buffs, etc.
+            // Ajoute ici la logique pour calculer les effets de type
             adversaire.Health -= degatsEffectifs;
             Console.WriteLine($"{Name} utilise {attaque.Nom} et inflige {degatsEffectifs} points de dégâts à {adversaire.Name}.");
         }*/
@@ -191,10 +190,10 @@ namespace Jeu_Console_C_
             {
                 AugmentationDegatsPourcentage = attaque.AugmentationDegatsPourcentage;
             }
-            // Après l'attaque, réinitialise ou ajuste les modificateurs selon l'attaque utilisée
-            //this.AugmentationDegatsPourcentage = attaque.AugmentationDegatsPourcentage; // Suppose que Attaque a une propriété ModificateurDegatsSuivant
+            // après l'attaque, réinitialise ou ajuste les modificateurs selon l'attaque utilisée
+            //this.AugmentationDegatsPourcentage = attaque.AugmentationDegatsPourcentage; 
 
-            // Réinitialiser le modificateur après son application pour que son effet ne dure qu'un tour, sauf spécification contraire
+            
             //this.AugmentationDegatsPourcentage = 0;
 
             // Vérifier si l'adversaire est vaincu
@@ -207,7 +206,7 @@ namespace Jeu_Console_C_
 
 
 
-        // Extension: Affichage des informations du Techmon, incluant les attaques et leurs effets
+        // Extension: Affichage des informations du Techmon, incluant les attaques et leurs effets (je crois ya plus besoin)
         public void AfficherInformations()
         {
             Console.WriteLine($"Nom: {Name}, Type: {Type}, Niveau: {Niveau}, PV: {Health}");

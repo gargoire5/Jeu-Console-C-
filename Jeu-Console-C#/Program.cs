@@ -1,11 +1,11 @@
-﻿using Jeu_Console_C_;
+using Jeu_Console_C_;
 using System;
 
 class Program
 {
-    static void Main()
+    static void Main(string[] args)
     {
-        var Model = new Model();
-        Console.WriteLine(Model.map);
-    }
+        var sceneManager = new SceneManager();
+        sceneManager.Update();
+    }                                                                                                                                                                                                                  
 }

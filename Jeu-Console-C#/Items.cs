@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +9,7 @@ namespace Jeu_Console_C_
     {
         public Items(string name, string effect, int quantity) : base(name, effect, quantity)
         {
-    
+
         }
 
         public virtual void UseItem(Techmons techmons)
@@ -21,7 +21,7 @@ namespace Jeu_Console_C_
         {
             int restoredHealth = 20;
 
-            if (techmons.Health < techmons.MaxHeath)
+            /*if (techmons.Health < techmons.MaxHeath)
             {
                 restoredHealth = Math.Min(techmons.MaxHeath - techmons.Health, restoredHealth);
 
@@ -32,8 +32,8 @@ namespace Jeu_Console_C_
             else
             {
                 Console.WriteLine($"{techmons.Name} n'a pas besoin de restauré ces HP");
-            }
-            
+            }*/
+
         }
     }
 

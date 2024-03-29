@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Jeu_Console_C_
 {
-    public class InputManager 
+    public class InputManager
     {
 
         private static bool keyPressed = false;
         private static ConsoleKeyInfo lastKeyPress;
-        
+
         public static void ReadKey()
         {
             if (Console.KeyAvailable)

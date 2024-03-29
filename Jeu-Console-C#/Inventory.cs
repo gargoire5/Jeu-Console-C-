@@ -1,4 +1,4 @@
-﻿using Scenes;
+using Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace Jeu_Console_C_
                 item.Quantity = quantity;
                 items.Add(item);
             }
-            
+
         }
 
         public void RemoveSelectedItem()

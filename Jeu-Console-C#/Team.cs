@@ -1,4 +1,4 @@
-﻿using Scenes;
+using Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace Jeu_Console_C_
 
         public void AddPokemon(Techmons techmon)
         {
-            if (techmons.Count < 6) 
+            if (techmons.Count < 6)
             {
                 techmons.Add(techmon);
                 Console.WriteLine($"Le Pokémon {techmon.Name} a été ajouté à l'équipe.");
@@ -38,12 +38,12 @@ namespace Jeu_Console_C_
 
         public void RemoveHp(Techmons techmons, int damage)
         {
-            techmons.Health -= damage;
+            /*techmons.Health -= damage;
 
-            if(techmons.Health < 0)
+            if (techmons.Health < 0)
             {
                 techmons.Health = 0;
-            }
+            }*/
         }
 
         public void MoveSelectionUp()
@@ -90,7 +90,7 @@ namespace Jeu_Console_C_
                 }
 
                 Techmons CurrentTechmon = techmons[i];
-                Console.WriteLine($"{i + 1}. {CurrentTechmon.Name} ({CurrentTechmon.Health}/{CurrentTechmon.MaxHeath}) HP {CurrentTechmon.Type} {CurrentTechmon.Niveau}");
+                Console.WriteLine($"{i + 1}. {CurrentTechmon.Name} ({CurrentTechmon.Health}) HP {CurrentTechmon.Type} {CurrentTechmon.Niveau}");
 
                 Console.ResetColor();
             }

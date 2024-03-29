@@ -1,4 +1,4 @@
-﻿using Jeu_Console_C_;
+using Jeu_Console_C_;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,13 +24,14 @@ namespace Scenes
         }
         public void Update()
         {
+            Game game = new Game();
             while (true)
             {
                 Console.SetCursorPosition(0, 0);
                 InputManager.ReadKey();
                 if (InputManager.IsKeyPressed(ConsoleKey.P))
                 {
-                    new SceneGame();
+                    new SceneGame(game);
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.Q))
                 {
@@ -41,14 +42,21 @@ namespace Scenes
 
         }
     }
-    internal class SceneGame
+    public class SceneGame
     {
-        Model model;
-        Player player;
-        public SceneGame()
+        private Game game; // Référence à Game
+        private Model model = new Model();
+        private Player player;
+        private List<Techmons> equipeAdverse = new List<Techmons>();
+
+        public SceneGame(Game game)
         {
+            this.game = game;
             model = new Model();
-            player = new Player(81, 16);
+            this.player = player;
+            player = new Player(81, 16); 
+            this.equipeAdverse = new List<Techmons>();
+
             Console.Clear();
             Update();
         }
@@ -167,7 +175,7 @@ namespace Scenes
                     index = (player.playerY - 1) * 89 + player.playerX + 1;
                     Console.SetCursorPosition(player.playerX, player.playerY);
                     Console.Write("L");
-                    Console.SetCursorPosition(0, 25) ; 
+                    Console.SetCursorPosition(0, 25);
                     Console.Write("Leo : \r\n\r\n   Le jour ou Gianni viendras demander de l'aide a Dylan tu pourras revenir me voir ");
                     player.playerX--;
                     Console.SetCursorPosition(player.playerX, player.playerY);
@@ -193,43 +201,69 @@ namespace Scenes
                     Console.Write("@");
 
                 }
+                if (map == model.mario)
+                {
+                    if (player != null && equipeAdverse != null)
+                    {
+                        game.DemarrerCombat(player, equipeAdverse);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Erreur : joueur ou equipeAdverse est null.");
+                    }
+                    
+                }
+
             }
         }
     }
-    public class SceneFight
+    /*public class SceneFight
     {
-        Model model = new Model();
-        public void Update()
-        {
+        private readonly Action _demarrerCombat;
+        private Model model = new Model();
+        private string map; // Déclaration de la variable map
 
+        public SceneFight(Action demarrerCombat)
+        {
+            _demarrerCombat = demarrerCombat;
+            this.map = model.couloir; // Initialisation de map avec la valeur de model.couloir
         }
 
-    }
+        public void Update()
+        {
+            if (map == model.couloir)
+            {
+                _demarrerCombat?.Invoke();
+            }
+        }
+    }*/
+
 
     internal class SceneTeam
     {
         Game game = new Game();
         Model model = new Model();
-        Team team;
+        Game Techmons;
         Inventory inventory = new Inventory();
+        Team team;
 
-        Techmons Gianni = new Techmons("Gianni", 20, 20, TypeElement.Css, 5);
-        Techmons Ewen = new Techmons("Ewen", 45, 45, TypeElement.Python, 12);
-        Techmons Enzo = new Techmons("Enzo", 12, 12, TypeElement.C, 1);
-        Techmons Kyllian = new Techmons("Kyllian", 62, 62, TypeElement.Python, 17);
-        Techmons Benjamin = new Techmons("Benjamin", 26, 26, TypeElement.C, 7);
-        Techmons Grégoire = new Techmons("Grégoire", 82, 82, TypeElement.Css, 21);
+        Techmons gianni = new Techmons("Gianni", 100, TypeElement.Css, 1);
+        Techmons ewen = new Techmons("Ewen", 100, TypeElement.Python, 1);
+        Techmons enzo = new Techmons("Enzo", 100, TypeElement.C, 1);
+        Techmons grégoire = new Techmons("Grégoire", 100, TypeElement.Css, 1);
+        Techmons kyllian = new Techmons("Kyllian", 100, TypeElement.Python, 1);
+        Techmons benjamin = new Techmons("Benjamin", 100, TypeElement.C, 1);
 
         public SceneTeam()
         {
-            team = new Team(); 
-            team.AddPokemon(Gianni);
-            team.AddPokemon(Ewen);
-            team.AddPokemon(Enzo);
+            team = new Team();
+            team.AddPokemon(gianni);
+            team.AddPokemon(ewen);
+            team.AddPokemon(enzo);
 
-            team.RemoveHp(Gianni, 5);
-            team.RemoveHp(Ewen, 12);
-            team.RemoveHp(Enzo, 2);
+            team.RemoveHp(gianni, 5);
+            team.RemoveHp(ewen, 12);
+            team.RemoveHp(enzo, 2);
 
             team.DisplayTeam();
         }
@@ -297,7 +331,7 @@ namespace Scenes
             while (inventActive)
             {
                 Console.Clear();
-                inventory.DisplayInventory(); 
+                inventory.DisplayInventory();
                 Console.WriteLine("Sélectionnez un objet et appuyez sur Entrée pour l'utiliser.");
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
@@ -327,19 +361,19 @@ namespace Scenes
                             team.DisplayTeam();
                             Console.WriteLine("Sélectionnez le Pokémon sur lequel utiliser la potion:");
 
-                            
+
                             bool selected = false;
                             int selectedIndex = 0;
                             bool displayUpdated = false;
 
                             while (!selected)
                             {
-                                if (displayUpdated) 
+                                if (displayUpdated)
                                 {
-                                    Console.Clear(); 
-                                    team.DisplayTeam(); 
+                                    Console.Clear();
+                                    team.DisplayTeam();
                                     Console.WriteLine("Sélectionnez le Pokémon sur lequel utiliser la potion:");
-                                    displayUpdated = false; 
+                                    displayUpdated = false;
                                 }
 
                                 ConsoleKeyInfo keyInfo1 = Console.ReadKey(true);
@@ -348,12 +382,12 @@ namespace Scenes
                                     case ConsoleKey.UpArrow:
                                         team.MoveSelectionUp();
                                         selectedIndex--;
-                                        displayUpdated = true; 
+                                        displayUpdated = true;
                                         break;
                                     case ConsoleKey.DownArrow:
                                         team.MoveSelectionDown();
                                         selectedIndex++;
-                                        displayUpdated = true; 
+                                        displayUpdated = true;
                                         break;
                                     case ConsoleKey.Enter:
                                         Techmons selectedTechmons = team.GetSelectedTechmons();
@@ -367,7 +401,7 @@ namespace Scenes
                                         break;
                                 }
                             }
-                            
+
                         }
                         else
                         {

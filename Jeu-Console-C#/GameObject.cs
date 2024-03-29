@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +14,11 @@ namespace Jeu_Console_C_
         C
     }
 
-    internal class GameObject
+    public class GameObject
     {
         public string Name { get; protected set; }
-        public int Health { get; set; }
-        public int MaxHeath { get; set; }
+        public int Health { get; protected set; }
+        //public int MaxHeath { get; set; }
         public int Quantity { get; set; } = 0;
         public int Niveau { get; protected set; }
         public int Experience { get; protected set; }
@@ -29,12 +29,12 @@ namespace Jeu_Console_C_
         public float ReductionDegatsRecus { get; protected set; }
         public string Effect { get; protected set; }
 
-        public GameObject(string name, int health, int maxheath, TypeElement type, int niveau)
+        public GameObject(string name, int health, TypeElement type, int niveau)
         {
             Name = name;
             Type = type;
             Health = health;
-            MaxHeath = maxheath;
+            //MaxHeath = maxheath;
             Niveau = niveau;
             Experience = 0;
             ExpPourNiveauSuivant = 100;
@@ -58,5 +58,7 @@ namespace Jeu_Console_C_
         public GameObject(string name, TypeElement type, int niveau) : this(name)
         {
         }
+
+        
     }
 }

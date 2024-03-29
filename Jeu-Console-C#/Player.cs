@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Jeu_Console_C_
 {
@@ -9,21 +10,18 @@ namespace Jeu_Console_C_
     {
         public int playerX { get; set; }
         public int playerY { get; set; }
-        public Player(int X, int Y)
+        public string Name { get; set; }
+        public Player(int X, int Y, string name)
         {
             playerX = X;
             playerY = Y;
+            Name = name;
+            TechmonsCaptures = new List<Techmons>();
 
         }
-        public string Name { get; set; }
         public List<Techmons> TechmonsCaptures { get; set; }
         public List<Techmons> TechmonsChoisisPourLeCombat { get; private set; } = new List<Techmons>();
 
-        public Player(string name)
-        {
-            Name = name;
-            TechmonsCaptures = new List<Techmons>();
-        }
         public void CapturerTechmon(Techmons techmon)
         {
             TechmonsCaptures.Add(techmon);

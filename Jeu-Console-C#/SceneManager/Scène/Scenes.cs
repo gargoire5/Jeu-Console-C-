@@ -35,8 +35,8 @@ namespace Scenes
                 }
                 if (InputManager.IsKeyPressed(ConsoleKey.Q))
                 {
-                    Console.Clear();
-                    Environment.Exit(0);
+                    //Console.Clear();
+                    //Environment.Exit(0);
                 }
             }
 
@@ -46,15 +46,19 @@ namespace Scenes
     {
         private Game game; // Référence à Game
         private Model model = new Model();
-        private Player player;
+        Player player;
         private List<Techmons> equipeAdverse = new List<Techmons>();
 
         public SceneGame(Game game)
         {
             this.game = game;
             model = new Model();
-            this.player = player;
-            player = new Player(81, 16); 
+            Console.Clear();
+            Console.WriteLine("\r\n\r\nBienvenue dans le jeu Techmon!");
+            Console.Write("\r\n\r\nEntrez votre nom de joueur : ");
+            string nomPlayer = Console.ReadLine();
+            player = new Player(81, 16, nomPlayer);
+            Console.WriteLine($"Bonjour, {player.Name}!");
             this.equipeAdverse = new List<Techmons>();
 
             Console.Clear();

@@ -32,9 +32,7 @@ class Program
     {
         Resize();
         InitialiserJeu();
-        CreerJoueur();
         GenererEquipeAdverse();
-        SelectionnerTechmonsJoueur();
         
 
 
@@ -46,8 +44,8 @@ class Program
         //SceneFight sceneFight = new SceneFight(DemarrerCombat);
         
         
-        //DemarrerCombat();
-        //sceneFight.Update();
+        DemarrerCombat();
+        //SceneFight.Update();
     }
 
 
@@ -57,16 +55,7 @@ class Program
         // initialisations
     }
 
-    static void CreerJoueur()
-    {
-        Console.WriteLine("\r\n\r\nBienvenue dans le jeu Techmon!");
-        Console.Write("\r\n\r\nEntrez votre nom de joueur : ");
-        string nomJoueur = Console.ReadLine();
-        joueur = new Player(nomJoueur);
-        Console.WriteLine($"Bonjour, {joueur.Name}!");
-    }
-
-    static void SelectionnerTechmonsJoueur()
+    static void SelectionnerTechmonsJoueur(Player joueur)
     {
         Console.WriteLine("Choisissez deux Techmons pour votre équipe (entrez le numéro) :");
 
@@ -123,7 +112,7 @@ class Program
         }*/
     }
 
-    /*public static void DemarrerCombat()
+    public static void DemarrerCombat()
     {
         //Console.WriteLine("Le combat commence !");
         Console.Clear();
@@ -136,5 +125,5 @@ class Program
             return; // Quitte le programme si Echap est appuyer.
         }
         //  retourner au menu principal ou permettre d'autres actions post-combat(capturer pokemon )???
-    }*/
+    }
 }

@@ -83,7 +83,7 @@ namespace Jeu_Console_C_
         public void DemarrerCombat(Player joueur, List<Techmons> equipeAdverse)
         {
             Console.WriteLine("Le combat commence !");
-            /*if (joueur == null || joueur.TechmonsCaptures == null || equipeAdverse == null)
+            if (joueur == null || joueur.TechmonsCaptures == null || equipeAdverse == null)
             {
                 Console.WriteLine("Erreur : Une référence null a été trouvée.");
                 return; // Quitte la méthode pour éviter l'erreur
@@ -93,7 +93,7 @@ namespace Jeu_Console_C_
             {
                 Console.WriteLine("Combat impossible à démarrer : un des joueurs n'a pas de Techmons.");
                 return;
-            }*/
+            }
 
             int indexTechmonJoueurActuel = 0;
             int indexTechmonActuelAdversaire = 0;

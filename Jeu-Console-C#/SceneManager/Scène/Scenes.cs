@@ -18,8 +18,8 @@ namespace Scenes
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
             model = new Model();
-            string centeredMenu = model.CenterText(model.menu);
-            Console.WriteLine(centeredMenu);
+            //string centeredMenu = model.CenterText(model.menu);
+            Console.WriteLine(model.menu);
             Update();
         }
         public void Update()
@@ -201,23 +201,15 @@ namespace Scenes
                     Console.Write("@");
 
                 }
-                if (map == model.mario)
+                if (InputManager.IsKeyPressed(ConsoleKey.O))
                 {
-                    if (player != null && equipeAdverse != null)
-                    {
-                        game.DemarrerCombat(player, equipeAdverse);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Erreur : joueur ou equipeAdverse est null.");
-                    }
-                    
+                    game.DemarrerCombat(player, equipeAdverse);
                 }
 
             }
         }
     }
-    /*public class SceneFight
+    public class SceneFight
     {
         private readonly Action _demarrerCombat;
         private Model model = new Model();
@@ -236,7 +228,7 @@ namespace Scenes
                 _demarrerCombat?.Invoke();
             }
         }
-    }*/
+    }
 
 
     internal class SceneTeam
